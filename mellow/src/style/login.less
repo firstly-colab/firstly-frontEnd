@@ -1,11 +1,22 @@
 .login {
-    form {
-        text-align: left;
-        padding: 30px;
-        margin: 10px;
+    p {
+        font-size: 1rem;
+        margin: -80px 0 50px 0;
     }
-    input {
-        margin: 10px 0;
-        
+    form {
+        label {
+            margin: 10px;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        input {
+            padding: 6px 8px;
+            border: 1px solid rgba(0, 0, 0, 0.5);
+            border-radius: 4px;
+            &::placeholder {
+                    letter-spacing: 0.02rem;
+            }
+        }
     }
 }

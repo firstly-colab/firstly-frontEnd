@@ -228,11 +228,14 @@ h3,
 body {
   text-align: center;
 }
+body {
+  background-color: #FAFBFF;
+}
 h2,
 h3 {
-  padding: 50px 0;
+  margin: 100px 0;
 }
-body {
+.App {
   height: 100vh;
 }
 .wrapper {
@@ -250,64 +253,125 @@ ul {
 a {
   text-decoration: none;
   cursor: pointer;
-  color: white;
+  color: #fff;
   padding: 10px;
 }
 button {
   cursor: pointer;
   border: none;
-  background-color: black;
+  background-color: #000;
   border-radius: 20px;
   padding: 10px;
   margin: 50px;
 }
+form {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+form input {
+  margin: 10px 0;
+}
+@font-face {
+  font-family: 'Shrikhand';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/shrikhand/v11/a8IbNovtLWfR7T7bMJwbBA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/worksans/v17/QGY_z_wNahGAdqQ43RhVcIgYT2Xz5u32K0nXNig.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/worksans/v17/QGY_z_wNahGAdqQ43RhVcIgYT2Xz5u32K3vXNig.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/worksans/v17/QGY_z_wNahGAdqQ43RhVcIgYT2Xz5u32K5fQNig.ttf) format('truetype');
+}
 body {
-  font-size: 125%;
-  font-family: "Kanit", sans-serif;
-  overflow-x: hidden;
-  scroll-behavior: smooth;
+  font-family: 'Work Sans', sans-serif;
 }
 h1 {
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 400;
-  text-transform: uppercase;
+  font-family: 'Shrikhand', cursive;
 }
 h2 {
-  font-size: 2rem;
-  font-weight: 400;
+  font-size: 1.25rem;
+  font-weight: 600;
 }
 h3 {
-  font-weight: 400;
+  font-size: 1rem;
+  font-weight: 600;
 }
 p {
-  font-size: 1rem;
-  line-height: 1.2rem;
+  font-size: 1.125;
+  line-height: 1.688rem;
+  font-weight: 400;
 }
 button {
   font-size: 1rem;
   font-weight: bold;
-  line-height: 1.2rem;
+  line-height: 1.5rem;
+  font-family: 'Work Sans', sans-serif;
+}
+::placeholder {
+  font-family: 'Work Sans', sans-serif;
 }
 .home p {
-  padding: 100px 0 50px 0;
+  padding: 50px 0;
 }
-.login form {
-  text-align: left;
-  padding: 30px;
+.home h1 {
+  margin: 100px 0;
+}
+.login p {
+  font-size: 1rem;
+  margin: -80px 0 50px 0;
+}
+.login form label {
   margin: 10px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
 }
-.login input {
-  margin: 10px 0;
+.login form input {
+  padding: 6px 8px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+}
+.login form input::placeholder {
+  letter-spacing: 0.02rem;
+}
+.survey p {
+  margin: 100px 0;
 }
 .questions div {
-  display: flex;
-  margin: 10px;
-  background-color: lightgrey;
-}
-.questions div label {
   margin: 10px;
   text-align: left;
 }
+.questions div label,
 .questions div input {
+  display: flex;
+  align-items: center;
   margin: 10px;
+}
+.questions div label,
+.questions div input[type='submit'] {
+  margin-top: 1em;
+  width: 100%;
+  background-color: #DCEAE9;
+  margin: 0 auto;
+  padding: 8px;
 }

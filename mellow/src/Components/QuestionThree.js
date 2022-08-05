@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import Loader3 from "../assets/Loader3.png"
+
 
 const QuestionThree = () => {
 
@@ -38,17 +40,19 @@ const QuestionThree = () => {
 
     return (
         <div className="questionThree">
-            <button><Link to="/survey/q2">Back Button</Link></button>
+            <button><Link to="/survey/q2">back Button</Link></button>
+            <img src={Loader3} alt="loading bar" />
             <h2>{questionArray[0].question}</h2>
             <form className="questions">
                 {questionArray[0].answers.map((answers, index) =>
                     <div key={index}>
-                        <input
-                            type="checkbox"
-                            value={answers}
-                            onChange={handleCheck}
-                        />
-                        <label htmlFor={answers}>{answers}</label>
+                        <label>
+                            <input
+                                type="checkbox"
+                                value={answers}
+                                onChange={handleCheck}
+                            /> {answers}
+                        </label>
                     </div>
                 )}
                 <button type="button" onClick={handleSubmit}><Link to="/survey/results">Results</Link></button>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Loader1 from "../assets/Loader1.png"
 
 
 const QuestionOne = () => {
@@ -33,21 +34,24 @@ const QuestionOne = () => {
 	const handleSubmit = (event) => {
         event.preventDefault();
         console.log(checked,"submitted list")
+
 	};
 
     return (
         <div className="questionOne">
-            <button><Link to="/survey">Back button</Link></button>
+            <button className="backButton"><Link to="/survey">back Button</Link></button>
+            <img src={Loader1} alt="loading bar" />
             <h2>{questionArray[0].question}</h2>
             <form className="questions">
                 {questionArray[0].answers.map((answers, index) =>  
                     <div key={index}>
-                        <input
-                            type="checkbox"
-                            value={answers}
-                            onChange={handleCheck}
-                        />
-                        <label htmlFor={answers}>{answers}</label>
+                        <label>
+                            <input
+                                type="checkbox"
+                                value={answers}
+                                onChange={handleCheck}
+                            /> {answers}
+                        </label>
                     </div>  
                 )}
                 <button type="button" onClick={handleSubmit}><Link to="/survey/q2">Next</Link></button>
