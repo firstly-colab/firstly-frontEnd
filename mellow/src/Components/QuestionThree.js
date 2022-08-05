@@ -1,46 +1,58 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const QuestionThree = () => {
 
     const questionArray = [
         //[0]
-        // {
-        //     question: `Which quality attracted you the most to "swipe right?"`,
-        //     answers: [
-        //         "Friends oriented",
-        //         "Pet Lover",
-        //         "Outdoorsy",
-        //         "Humorous"
-        //     ],
-        // }
-        // },
         {
-            question: "What is the most important to you in a partner?",
+            question: "Which best describes you?",
             answers: [
-                "Family oriented",
-                "Passionate about personal hobbies",
-                "Loves to travel",
-                "Open to trying new things"
+                "Music lover", 
+                "Netflix & Chill-er", 
+                "Foodie", 
+                "Planning the next hike"
             ],
-            questionId: 2,
+            questionId: 3,
         },
-        // {
-        //     question: "Which best describes you?",
-        //     answers: [
-        //         "Music Lover", 
-        //         "Netflix & Chill-er", 
-        //         "Foodie", 
-        //         "Planning the next hike"
-        //     ],
-        //     questionId: 3,
-        // },
     ];
+
+    const [checked, setChecked] = useState([]);
+
+    const handleCheck = (event) => {
+        let list = [...checked];
+        if (event.target.checked) {
+            list = [...checked, event.target.value];
+        } else {
+            list.splice(checked.indexOf(event.target.value));
+        }
+        setChecked(list);
+        console.log(list, "list of items checked")
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        
+        console.log(checked, "submitted list")
+    };
 
     return (
         <div className="questionThree">
             <button><Link to="/survey/q2">Back Button</Link></button>
-            <h2>Question Three</h2>
-            <button><Link to="/survey/results">Results</Link></button>
+            <h2>{questionArray[0].question}</h2>
+            <form className="questions">
+                {questionArray[0].answers.map((answers, index) =>
+                    <div key={index}>
+                        <input
+                            type="checkbox"
+                            value={answers}
+                            onChange={handleCheck}
+                        />
+                        <label htmlFor={answers}>{answers}</label>
+                    </div>
+                )}
+                <button type="button" onClick={handleSubmit}><Link to="/survey/results">Results</Link></button>
+            </form>
         </div>
     );
 };
