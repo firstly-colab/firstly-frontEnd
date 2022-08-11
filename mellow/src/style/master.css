@@ -240,7 +240,7 @@ h3 {
 }
 .wrapper {
   width: 85%;
-  max-width: 1200px;
+  max-width: 500px;
   margin: 0 auto;
 }
 img {
@@ -250,19 +250,12 @@ img {
 ul {
   list-style: none;
 }
-a {
-  text-decoration: none;
-  cursor: pointer;
-  color: #fff;
-  padding: 10px;
-}
 button {
-  cursor: pointer;
   border: none;
-  background-color: #000;
-  border-radius: 20px;
-  padding: 10px;
-  margin: 50px;
+  cursor: pointer;
+  padding: 10px 50px;
+  border-radius: 50px;
+  margin: 0 auto;
 }
 form {
   display: flex;
@@ -336,12 +329,15 @@ button {
 .home h1 {
   margin: 100px 0;
 }
+.home img {
+  width: 300px;
+  height: auto;
+}
 .login p {
   font-size: 1rem;
   margin: -80px 0 50px 0;
 }
 .login form label {
-  margin: 10px;
   display: flex;
   flex-direction: column;
   text-align: left;
@@ -357,21 +353,72 @@ button {
 .survey p {
   margin: 100px 0;
 }
-.questions div {
-  margin: 10px;
-  text-align: left;
+.survey img {
+  width: 300px;
+  height: auto;
 }
-.questions div label,
-.questions div input {
+.flex {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  margin: 10px;
+  margin: 100px 0;
 }
-.questions div label,
-.questions div input[type='submit'] {
-  margin-top: 1em;
-  width: 100%;
+.flex img {
+  height: 7px;
+  margin: 10px 0;
+  width: 90%;
+}
+.questions div {
+  margin: 10px 0;
+}
+.questions div label {
+  text-align: left;
+  border-radius: 4px;
   background-color: #DCEAE9;
-  margin: 0 auto;
-  padding: 8px;
+  padding: 10px 20px;
+}
+.questions div label:hover {
+  outline: 2px solid #54B3AF;
+}
+.questions div label:focus {
+  outline: 2px solid #54B3AF;
+}
+.questions div input[type=checkbox] + label {
+  display: block;
+  cursor: pointer;
+  position: relative;
+}
+.questions div input[type=checkbox] {
+  position: absolute !important;
+  height: 0;
+  width: 0;
+  overflow: hidden;
+}
+.questions div input[type=checkbox] + label:before {
+  content: "\2714";
+  text-align: center;
+  font-size: 15px;
+  border: 2px solid #323232;
+  border-radius: 2px;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  color: transparent;
+  transition: 0.2s;
+  background-color: #DCEAE9;
+}
+.questions div input[type=checkbox] + label:active:before {
+  transform: scale(0);
+}
+.questions div input[type=checkbox]:focus + label:before {
+  outline: #e80a0a solid 1px;
+  box-shadow: 0 0px 8px #000000;
+}
+.questions div input[type=checkbox]:checked + label:before {
+  background-color: #323232;
+  border-color: #323232;
+  color: #54B3AF;
+}
+.questions div :checked + label {
+  background-color: #54B3AF;
 }

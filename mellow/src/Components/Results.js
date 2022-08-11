@@ -1,12 +1,32 @@
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { IconButton } from "@mui/material";
+import { useState } from "react";
 
-const Results = () => {
+const Results = ({setPage, page}) => {
+
+    const navigate = useNavigate();
+
+    const handleSubmit = () => {
+        navigate("/survey/music")
+    };
+
+    const handleBack = () => {
+        navigate("/survey")
+        setPage(page + 3)
+
+    };
 
     return (
         <div className="results">
-            <button><Link to="/survey/q3">Back Button</Link></button>
+            <IconButton
+                type="button"
+                onClick={handleBack}>
+                <ArrowBackIcon />
+            </IconButton>
             <h2>Results</h2>
-            <button><Link to="/survey/music">Music</Link></button>
+            <button onClick={handleSubmit}>Music</button>
         </div>
     );
 };

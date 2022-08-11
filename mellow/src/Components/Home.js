@@ -1,14 +1,20 @@
-import { Link } from "react-router-dom";
-import Meeting from "../assets/Meeting.png"
+import dance from "../assets/dance.png"
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+
+    const navigate = useNavigate();
+
+    const handleSubmit = () => {
+        navigate("/login")
+    };
 
     return (
         <div className="home">
             <h1>Firstly</h1>
-            <img src={Meeting} alt="illustrtion of a mobile phone and two people beside it" />
+            <img src={dance} alt="illustrtion of a mobile phone and two people beside it" />
             <p>Curated conversation starters to bring to your first date!</p>
-            <button><Link to="/login">Let’s go!</Link></button>
+            <button onClick={handleSubmit}>Let’s go!</button>
         </div>
     );
 };

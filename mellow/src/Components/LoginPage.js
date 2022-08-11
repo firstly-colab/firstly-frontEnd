@@ -1,6 +1,13 @@
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
+
+	const navigate = useNavigate();
+
+	const handleSubmit = (event) => {
+		navigate("/survey")
+	};
 
 	return (
         <div className="login">
@@ -20,7 +27,7 @@ const LoginPage = () => {
 					<input type="text" name="name" placeholder="Create a password" />
 				</label>
 			</form>
-			<button><Link to="/survey">Sign Up</Link></button>
+			<button onClick={handleSubmit}>Sign Up</button>
 		</div>
 	);
 };

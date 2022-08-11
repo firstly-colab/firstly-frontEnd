@@ -1,20 +1,73 @@
+.flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 100px 0;
+    img {
+        height: 7px;
+        margin: 10px 0;
+        width: 90%;
+    }
+}
+
 .questions {
     div {
-        margin: 10px;
-        text-align: left;
-        label,
-        input {
-            display:flex;
-            align-items: center;
-            margin: 10px;
+        margin: 10px 0;
+        label {
+            text-align: left;
+            border-radius: 4px;
+            background-color: @lightgreen;
+            padding: 10px 20px;
+            &:hover {
+                outline: 2px solid @darkgreen;
+            }
+            &:focus {
+                outline: 2px solid @darkgreen;
+            }
         }
-        label,
-        input[type='submit'] {
-            margin-top: 1em;
-            width: 100%;
-            background-color: #DCEAE9;
-            margin: 0 auto;
-            padding: 8px;
+        input[type=checkbox]+label {
+            display: block;
+            cursor: pointer;
+            position: relative;
+        }
+
+        input[type=checkbox] {
+            position: absolute !important;
+            height: 0;
+            width: 0;
+            overflow: hidden;
+        }
+
+        input[type=checkbox]+label:before {
+            content: "\2714";
+            text-align: center;
+            font-size: 15px;
+            border: 2px solid #323232;
+            border-radius: 2px;
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            color: transparent;
+            transition: .2s;
+            background-color: @lightgreen;
+        }
+
+        input[type=checkbox]+label:active:before {
+            transform: scale(0);
+        }
+
+        input[type=checkbox]:focus + label:before {
+            outline: rgb(232, 10, 10) solid 1px;
+            box-shadow: 0 0px 8px #000000;
+        }
+
+        input[type=checkbox]:checked+label:before {
+            background-color: #323232;
+            border-color: #323232;
+            color: @darkgreen;
+        }
+        :checked + label {
+            background-color: @darkgreen;
         }
     }
 }

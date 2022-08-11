@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Loader1 from "../assets/Loader1.png"
+import Loader1 from "../assets/Loader1.png";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useNavigate } from "react-router-dom";
+
 
 
 const QuestionOne = () => {
@@ -19,6 +22,7 @@ const QuestionOne = () => {
     ];
 
     const [checked, setChecked] = useState([]);
+    const [quality, setQuality] = useState([]);
 
     const handleCheck = (event) => {
         let list = [...checked];
@@ -31,30 +35,40 @@ const QuestionOne = () => {
         console.log(list,"list of items checked")
     };
 
+    const navigate = useNavigate();
+
 	const handleSubmit = (event) => {
         event.preventDefault();
         console.log(checked,"submitted list")
 
+        navigate("/survey/q2")
 	};
 
     return (
         <div className="questionOne">
-            <button className="backButton"><Link to="/survey">back Button</Link></button>
-            <img src={Loader1} alt="loading bar" />
+            <div className="flex">
+                <Link to="/survey"><ArrowBackIcon /></Link>
+                <img src={Loader1} alt="loading bar" />
+            </div>
             <h2>{questionArray[0].question}</h2>
             <form className="questions">
                 {questionArray[0].answers.map((answers, index) =>  
                     <div key={index}>
-                        <label>
-                            <input
-                                type="checkbox"
-                                value={answers}
-                                onChange={handleCheck}
-                            /> {answers}
-                        </label>
-                    </div>  
+                        <input
+                            id={index}
+                            type="checkbox"
+                            value={answers}
+                            onChange={handleCheck}
+                        />
+                        <label htmlFor={index}> {answers} </label>
+                    </div> 
                 )}
-                <button type="button" onClick={handleSubmit}><Link to="/survey/q2">Next</Link></button>
+                <button 
+                    type="button" 
+                    onClick={handleSubmit}
+                    disabled={checked.length === 0}
+                >Hello
+                </button>
             </form>
         </div>
     );    
