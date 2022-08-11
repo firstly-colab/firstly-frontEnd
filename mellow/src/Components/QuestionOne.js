@@ -18,7 +18,25 @@ const QuestionOne = () => {
                 "Outdoorsy",
                 "Humorous"
             ],
-        }
+        },
+        {
+            question: "What is the most important to you in a partner?",
+            answers: [
+                "Family oriented",
+                "Passionate about personal hobbies",
+                "Loves to travel",
+                "Open to trying new things"
+            ],
+        },
+        {
+            question: "Which best describes you?",
+            answers: [
+                "Music lover",
+                "Netflix & Chill-er",
+                "Foodie",
+                "Planning the next hike"
+            ],
+        },
     ];
 
     const [checked, setChecked] = useState([]);

@@ -40,6 +40,7 @@ const Survey = () => {
                     "Outdoorsy",
                     "Humorous"
                 ],
+                checked: [false, false, false, false]
             },
             {
                 question: "What is the most important to you in a partner?",
@@ -49,6 +50,7 @@ const Survey = () => {
                     "Loves to travel",
                     "Open to trying new things"
                 ],
+                checked: [false, false, false, false]
             },
             {
                 question: "Which best describes you?",
@@ -58,33 +60,38 @@ const Survey = () => {
                     "Foodie",
                     "Planning the next hike"
                 ],
+                checked: [false, false, false, false]
             },
         ];
 
         const [checked, setChecked] = useState([]);
-        const [arrayOne, setArrayOne] = useState([]);
-        const [arrayTwo, setArrayTwo] = useState([]);
-        const [arrayThree, setArrayThree] = useState([]);
+        // const [arrayOne, setArrayOne] = useState([]);
+        // const [arrayTwo, setArrayTwo] = useState([]);
+        // const [arrayThree, setArrayThree] = useState([]);
         // const [checkedState, setCheckedState] = useState(
         //     new Array(questionArray[0].answers.length).fill(false));
+        // const [checkedStateTwo, setCheckedStateTwo] = useState(
+        // new Array(questionArray[1].answers.length).fill(false));
+        // const [checkedStateThree, setCheckedStateThree] = useState(
+        // new Array(questionArray[2].answers.length).fill(false));
 
-    // console.log(questionArray[0].answers.length)
 
-        const handleCheck = (event) => {
-            // console.log(checkedState, "checkedstate")
+        const handleCheck = (event, index) => {
+            console.log(event.target)
             // const updatedCheckedState = checkedState.map((item, index) =>
-            //     index === event ? !item : item
+            //     index == event.target.id ? !item : item
             // );
 
             // setCheckedState(updatedCheckedState);
             // console.log(updatedCheckedState, "updatedchecked state")
-
+            questionArray[page - 1].checked[index] = !questionArray[page - 1].checked[index];
+            console.log(questionArray[page - 1].checked, index)
             let list = [...checked];
             if (event.target.checked) {
-                list = [...checked, event.target.value];
+                list = [...checked, event.target.name];
             } else {
-                console.log((event.target.value), "index of")
-                list.splice(checked.indexOf(event.target.value), 1);
+                console.log((event.target.name), "index of")
+                list.splice(checked.indexOf(event.target.name), 1);
             }
             setChecked(list);
             console.log(list, "list of items checked")
@@ -98,27 +105,29 @@ const Survey = () => {
                 setPage(page - 1)
         };
 
+        
+
         const navigate = useNavigate();
 
         const handleSubmit = (event) => {
             event.preventDefault();
             console.log(checked, "submitted list")
+            
 
-            console.log(checked, "submitted list")
-            setChecked([])
-            if (page === 1) {
-                setArrayOne(checked)
-                console.log(arrayOne, "arrayOne")
-            }
-            else if (page === 2) {
-                setArrayTwo(checked)
-                console.log(arrayOne, "arrayTwo")
-            }
-            else if (page === 3) {
-                setArrayThree(checked)
-                console.log(arrayOne, "arrayThree")
-            }
-            console.log(page, "page")
+            // setChecked([])
+            // if (page === 1) {
+            //     setArrayOne(checked)
+            //     console.log(arrayOne, "arrayOne")
+            // }
+            // else if (page === 2) {
+            //     setArrayTwo(checked)
+            //     console.log(arrayTwo, "arrayTwo")
+            // }
+            // else if (page === 3) {
+            //     setArrayThree(checked)
+            //     console.log(arrayThree, "arrayThree")
+            // }
+            // console.log(page, "page")
             if (page < 3) {
                 setPage(page + 1)
             }
@@ -129,6 +138,14 @@ const Survey = () => {
             }
             // setChecked([])
         };
+
+
+        // const [checkedStateTwo, setCheckedStateTwo] = useState(
+        // new Array(questionArray[1].answers.length).fill(false));
+        // const [checkedStateThree, setCheckedStateThree] = useState(
+        // new Array(questionArray[2].answers.length).fill(false));
+
+
 
     if (page === 0) {
         return (
@@ -165,12 +182,15 @@ const Survey = () => {
                             <input
                                 id={index}
                                 type="checkbox"
-                                value={answers}
+                                value={questionArray[page - 1].checked}
+                                
+                                name ={answers}  
                                 // checked={checkedState[index]}
-                                onChange={handleCheck}
+                                onChange={(event) => {
+                                    handleCheck(event, index)
+                                }}
                             />
                             <label htmlFor={index}> {answers} </label>
-                            {/* <p>{checkedState ? "unchecked" : "selected"}</p> */}
                         </div>
                     )}
                     <button
