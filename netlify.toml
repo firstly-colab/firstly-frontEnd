@@ -15,4 +15,4 @@
   publish = "mellow"
 
   # Default build command.
-  CI= npm run build
+  command = "CI= npm run build"
