@@ -2,10 +2,7 @@
 import { Routes, Route } from "react-router-dom";
 import Home from './Components/Home';
 import LoginPage from './Components/LoginPage';
-import QuestionOne from './Components/QuestionOne';
 import Survey from './Components/Survey';
-import QuestionTwo from './Components/QuestionTwo';
-import QuestionThree from './Components/QuestionThree';
 import Results from './Components/Results';
 import Music from './Components/Music';
 

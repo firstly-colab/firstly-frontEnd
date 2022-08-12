@@ -40,7 +40,7 @@ const QuestionOne = () => {
     ];
 
     const [checked, setChecked] = useState([]);
-    const [quality, setQuality] = useState([]);
+    // const [quality, setQuality] = useState([]);
 
     const handleCheck = (event) => {
         let list = [...checked];

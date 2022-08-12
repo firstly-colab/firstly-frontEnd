@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import Illustration2 from "../assets/Illustration2.png"
 import { useNavigate } from "react-router-dom";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
