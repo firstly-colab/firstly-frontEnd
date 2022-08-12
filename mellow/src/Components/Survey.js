@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import yourock from "../assets/yourock.gif"
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Loader1 from "../assets/Loader1.png";
 import Loader3 from "../assets/Loader3.png"
 import Loader2 from "../assets/Loader2.png"
@@ -8,13 +8,16 @@ import Loader2 from "../assets/Loader2.png"
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import Results from "./Results";
+import Context from '../context/Context'
 
 
 const Survey = () => {
+    const navigate = useNavigate();
 
+    //States
     const [page, setPage] = useState(0)
-
+    
+    //progress bar assets
     const imageArray = [
         {
             title: '33%',
@@ -30,123 +33,92 @@ const Survey = () => {
         },
     ]
 
-        const questionArray = [
-            //[0]
-            {
-                question: `Which quality attracted you the most to “swipe right?”"`,
-                answers: [
-                    "Friends oriented",
-                    "Pet lover",
-                    "Outdoorsy",
-                    "Humorous"
-                ],
-                checked: [false, false, false, false]
-            },
-            {
-                question: "What is the most important to you in a partner?",
-                answers: [
-                    "Family oriented",
-                    "Passionate about personal hobbies",
-                    "Loves to travel",
-                    "Open to trying new things"
-                ],
-                checked: [false, false, false, false]
-            },
-            {
-                question: "Which best describes you?",
-                answers: [
-                    "Music lover",
-                    "Netflix & Chill-er",
-                    "Foodie",
-                    "Planning the next hike"
-                ],
-                checked: [false, false, false, false]
-            },
-        ];
+    //survey question and available options
+    const questionArray = [
+        //[0]
+        {
+            question: `Which quality attracted you the most to “swipe right?”"`,
+            answers: [
+                "Friends oriented",
+                "Pet lover",
+                "Outdoorsy",
+                "Humorous"
+            ],
+        },
+        {
+            question: "What is the most important to you in a partner?",
+            answers: [
+                "Family oriented",
+                "Passionate about personal hobbies",
+                "Loves to travel",
+                "Open to trying new things"
+            ],
+        },
+        {
+            question: "Which best describes you?",
+            answers: [
+                "Music lover",
+                "Netflix & Chill-er",
+                "Foodie",
+                "Planning the next hike"
+            ],
+        },
+    ];
 
-        const [checked, setChecked] = useState([]);
-        // const [arrayOne, setArrayOne] = useState([]);
-        // const [arrayTwo, setArrayTwo] = useState([]);
-        // const [arrayThree, setArrayThree] = useState([]);
-        // const [checkedState, setCheckedState] = useState(
-        //     new Array(questionArray[0].answers.length).fill(false));
-        // const [checkedStateTwo, setCheckedStateTwo] = useState(
-        // new Array(questionArray[1].answers.length).fill(false));
-        // const [checkedStateThree, setCheckedStateThree] = useState(
-        // new Array(questionArray[2].answers.length).fill(false));
+    //some more states and contexts
+    const {checked, setChecked} = useContext(Context)
+    const [checkList, setCheckList] = useState({
+        0: new Array(questionArray[0].answers.length).fill(false),
+        1: new Array(questionArray[1].answers.length).fill(false),
+        2: new Array(questionArray[2].answers.length).fill(false)
+    })
 
-
-        const handleCheck = (event, index) => {
-            console.log(event.target)
-            // const updatedCheckedState = checkedState.map((item, index) =>
-            //     index == event.target.id ? !item : item
-            // );
-
-            // setCheckedState(updatedCheckedState);
-            // console.log(updatedCheckedState, "updatedchecked state")
-            questionArray[page - 1].checked[index] = !questionArray[page - 1].checked[index];
-            console.log(questionArray[page - 1].checked, index)
-            let list = [...checked];
-            if (event.target.checked) {
-                list = [...checked, event.target.name];
-            } else {
-                console.log((event.target.name), "index of")
-                list.splice(checked.indexOf(event.target.name), 1);
-            }
-            setChecked(list);
-            console.log(list, "list of items checked")
-        };
-
-
+    //event handling funtions
+    const handleCheck = (event, index) => {
+        const key = page - 1;
+        const keyValue = checkList[key]
         
-
-        const handleBack = () => {
-                setChecked([])
-                setPage(page - 1)
-        };
-
+        keyValue[index] = !keyValue[index]
         
+        setCheckList({...checkList, [key] : keyValue})
+        
+        let list = [...checked];
+        if (event.target.checked) {
+            list = [...checked, event.target.name];
+        } else {
+            console.log((event.target.name), "index of")
+            list.splice(checked.indexOf(event.target.name), 1);
+        }
+        setChecked(list);
+        console.log(list, "list of items checked")
+    };
 
-        const navigate = useNavigate();
+    const handleBack = () => {
+            setPage(page - 1)
+    };
 
-        const handleSubmit = (event) => {
-            event.preventDefault();
-            console.log(checked, "submitted list")
+
+    const handleNext = (event) => {
+        event.preventDefault();
+        console.log(checked, "submitted list")
+        setPage(page + 1)
+        
+        // if (page < 3) {
+        //     setPage(page + 1)
+        // }
+        // else {
             
+        //     <Results page={page} setPage={setPage}/>
+        //     navigate("/survey/results")
+        // }
+        // setChecked([])
+    };
 
-            // setChecked([])
-            // if (page === 1) {
-            //     setArrayOne(checked)
-            //     console.log(arrayOne, "arrayOne")
-            // }
-            // else if (page === 2) {
-            //     setArrayTwo(checked)
-            //     console.log(arrayTwo, "arrayTwo")
-            // }
-            // else if (page === 3) {
-            //     setArrayThree(checked)
-            //     console.log(arrayThree, "arrayThree")
-            // }
-            // console.log(page, "page")
-            if (page < 3) {
-                setPage(page + 1)
-            }
-            else {
-                
-                <Results page={page} setPage={setPage}/>
-                navigate("/survey/results")
-            }
-            // setChecked([])
-        };
+    const handleSubmit = () => {
+        navigate('/survey/results')
+    }
 
-
-        // const [checkedStateTwo, setCheckedStateTwo] = useState(
-        // new Array(questionArray[1].answers.length).fill(false));
-        // const [checkedStateThree, setCheckedStateThree] = useState(
-        // new Array(questionArray[2].answers.length).fill(false));
-
-
-
+    //rendering section
     if (page === 0) {
         return (
             <div className="survey">
@@ -182,10 +154,10 @@ const Survey = () => {
                             <input
                                 id={index}
                                 type="checkbox"
-                                value={questionArray[page - 1].checked}
-                                
+                                value={checkList[page - 1]}
+                                checked = {checkList[page - 1][index]}
                                 name ={answers}  
-                                // checked={checkedState[index]}
+                                
                                 onChange={(event) => {
                                     handleCheck(event, index)
                                 }}
@@ -193,12 +165,21 @@ const Survey = () => {
                             <label htmlFor={index}> {answers} </label>
                         </div>
                     )}
+                    {page < 3 ? (
                     <button
-                        type="button"
-                        onClick={handleSubmit}
-                        disabled={checked.length === 0}
-                    >Next
-                    </button>
+                            type="button"
+                            onClick={handleNext}
+                            disabled={checked.length === 0}
+                        >Next
+                        </button>
+                    ) : (
+                        <button
+                            type="button"
+                            onClick={handleSubmit}
+                            disabled={checked.length === 0}
+                        >Submit
+                        </button>
+                    )} 
                 </form>
             </div>
         );    
