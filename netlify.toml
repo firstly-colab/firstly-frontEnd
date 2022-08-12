@@ -12,7 +12,5 @@
   # a base has not been set. This sample publishes the directory
   # located at the absolute path "root/project/build-output"
 
-  publish = "mellow"
-
   # Default build command.
   command = "CI= npm run build"
