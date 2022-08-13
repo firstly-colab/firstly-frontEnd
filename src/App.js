@@ -5,6 +5,7 @@ import LoginPage from './Components/LoginPage';
 import Survey from './Components/Survey';
 import Results from './Components/Results';
 import Music from './Components/Music';
+import Dashboard from "./Components/Dashboard";
 
 //styles
 import './style/master.css'
@@ -12,15 +13,14 @@ import './style/master.css'
 function App() {
   return (
     <div className="App">
-      <div className="wrapper">
-        <Routes>
+      <Routes>
+        <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/survey" element={<Survey />} />
           <Route path="/survey/results" element={<Results />} />
           <Route path="/survey/music" element={<Music />} />
         </Routes>
-      </div>
     </div>
   );
 }

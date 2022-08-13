@@ -46,18 +46,21 @@ const Results = () => {
     console.log(result)
     return (
         <div className="results">
-            <IconButton
-                type="button"
-                onClick={handleBack}>
-                <ArrowBackIcon />
-            </IconButton>
-            <h2>Results</h2>
-            {result.map(dialogue => {
-                return (<div>
-                    <h4>{dialogue.dialogue}</h4>
-                </div>
-            )})}
-            <button onClick={handleSubmit}>Music</button>
+            <div className="wrapper">
+                <IconButton
+                    type="button"
+                    onClick={handleBack}
+                    className="arrowStyle">
+                    <ArrowBackIcon />
+                </IconButton>
+                <p>Here are some conversation starters for you, Shannon:</p>
+                {result.map(dialogue => {
+                    return (<div>
+                        <h4>{dialogue.dialogue}</h4>
+                    </div>
+                )})}
+                <button onClick={handleSubmit}>Music</button>
+            </div>
         </div>
     );
 };

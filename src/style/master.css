@@ -233,10 +233,7 @@ body {
 }
 h2,
 h3 {
-  margin: 100px 0;
-}
-.App {
-  height: 100vh;
+  margin: 30px 0 60px 0;
 }
 .wrapper {
   width: 85%;
@@ -246,16 +243,29 @@ h3 {
 img {
   display: block;
   margin: 0 auto;
+  width: 100%;
 }
 ul {
   list-style: none;
+}
+a {
+  text-decoration: none;
+  cursor: pointer;
+  color: #000;
+  padding: 10px;
+  display: block;
+  background-color: #fff;
+  margin: 0 auto;
+  border-radius: 50px;
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
 }
 button {
   border: none;
   cursor: pointer;
   padding: 10px 50px;
   border-radius: 50px;
-  margin: 0 auto;
+  background-color: #000;
+  color: #fff;
 }
 form {
   display: flex;
@@ -309,33 +319,52 @@ h3 {
   font-size: 1rem;
   font-weight: 600;
 }
+.login p {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  letter-spacing: 0.02rem;
+}
 p {
-  font-size: 1.125;
+  font-size: 1.125rem;
   line-height: 1.688rem;
   font-weight: 400;
+  letter-spacing: 0.005rem;
 }
 button {
   font-size: 1rem;
   font-weight: bold;
   line-height: 1.5rem;
   font-family: 'Work Sans', sans-serif;
+  letter-spacing: 0.008rem;
 }
 ::placeholder {
   font-family: 'Work Sans', sans-serif;
 }
+.expand {
+  font-weight: 500;
+  font-size: 0.75rem;
+}
+.favorites {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+}
+.logout {
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.025rem;
+}
 .home p {
-  padding: 50px 0;
+  padding: 30px 0;
 }
 .home h1 {
-  margin: 100px 0;
+  margin: 100px 0 50px 0;
 }
-.home img {
-  width: 300px;
-  height: auto;
+.login h2 {
+  margin: 100px 0 0 0;
 }
 .login p {
-  font-size: 1rem;
-  margin: -80px 0 50px 0;
+  margin: 20px 0 50px 0;
 }
 .login form label {
   display: flex;
@@ -350,18 +379,72 @@ button {
 .login form input::placeholder {
   letter-spacing: 0.02rem;
 }
+.login form button {
+  margin: 40px auto;
+}
+.dashboard h1 {
+  margin: 0 auto;
+  font-size: 1.5rem;
+}
+.dashboard p {
+  margin: 40px 0;
+}
+.dashboard .flexDashboard {
+  display: flex;
+  justify-content: space-between;
+}
+.dashboard .favorites,
+.dashboard .expand {
+  margin: 10px 0;
+  padding: 7px;
+}
+.dashboard .expand {
+  background-color: #FAFBFF;
+  color: #000;
+  text-decoration: underline;
+}
+.dashboard .takeQuestionaire {
+  margin: 0 0 40px 0;
+}
+.dashboxcontainer {
+  display: flex;
+  align-items: center;
+  background-color: #DCEAE9;
+  padding: 50px;
+  position: relative;
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
+}
+.dashboxcontainer .arrowbutton {
+  position: absolute;
+  left: 10%;
+}
+.logout {
+  position: absolute;
+  right: 10%;
+  background-color: #DCEAE9;
+  padding: 0;
+  color: #000;
+  text-decoration: underline;
+}
+.seeAll {
+  background-color: #DCEAE9;
+  padding: 0 0 0 0;
+}
 .survey p {
-  margin: 100px 0;
+  margin: 100px 0 50px 0;
 }
 .survey img {
   width: 300px;
   height: auto;
 }
+.survey button {
+  margin: 100px 0 50px 0;
+}
 .flex {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 100px 0;
+  margin: 50px 0 0 0;
 }
 .flex img {
   height: 7px;
@@ -421,4 +504,24 @@ button {
 }
 .questions div :checked + label {
   background-color: #54B3AF;
+}
+.questions button {
+  margin: 100px 0 50px 0;
+}
+.results .arrowStyle {
+  margin: 50px 0 0 0;
+  display: flex;
+}
+.results p {
+  margin: 30px 0 60px 0;
+}
+.music .arrowStyle {
+  margin: 50px 0 0 0;
+  display: flex;
+}
+.music p {
+  margin: 30px 0 60px 0;
+}
+.music p:nth-child(4) {
+  margin: 60px 0 20px 0;
 }

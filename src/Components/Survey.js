@@ -1,9 +1,9 @@
 // import { Link } from "react-router-dom";
 import yourock from "../assets/yourock.gif"
 import { useState, useContext } from "react";
-import Loader1 from "../assets/Loader1.png";
-import Loader3 from "../assets/Loader3.png"
-import Loader2 from "../assets/Loader2.png"
+import Loader1 from "../assets/Loader1.svg";
+import Loader3 from "../assets/Loader3.svg"
+import Loader2 from "../assets/Loader2.svg"
 
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { IconButton } from "@mui/material";
@@ -132,55 +132,57 @@ const Survey = () => {
     else {
         return (
             <div className="questionOne">
-                <div className="flex">
-                    <IconButton 
-                        type="button" 
-                        onClick={handleBack}>
-                        <ArrowBackIcon />
-                    </IconButton>
-                    <img 
-                        src={imageArray[page - 1].image} 
-                        alt={imageArray[page - 1].title}
-                    />
-                </div>
+                <div className="wrapper">
+                    <div className="flex">
+                        <IconButton 
+                            type="button" 
+                            onClick={handleBack}>
+                            <ArrowBackIcon />
+                        </IconButton>
+                        <img 
+                            src={imageArray[page - 1].image} 
+                            alt={imageArray[page - 1].title}
+                        />
+                    </div>
 
-                <h2>
-                    {questionArray[page - 1].question}
-                </h2>
+                    <h2>
+                        {questionArray[page - 1].question}
+                    </h2>
 
-                <form className="questions">
-                    {questionArray[page - 1].answers.map((answers, index) =>
-                        <div key={index}>
-                            <input
-                                id={index}
-                                type="checkbox"
-                                value={checkList[page - 1]}
-                                checked = {checkList[page - 1][index]}
-                                name ={answers}  
-                                
-                                onChange={(event) => {
-                                    handleCheck(event, index)
-                                }}
-                            />
-                            <label htmlFor={index}> {answers} </label>
-                        </div>
-                    )}
-                    {page < 3 ? (
-                    <button
-                            type="button"
-                            onClick={handleNext}
-                            disabled={checked.length === 0}
-                        >Next
-                        </button>
-                    ) : (
+                    <form className="questions">
+                        {questionArray[page - 1].answers.map((answers, index) =>
+                            <div key={index}>
+                                <input
+                                    id={index}
+                                    type="checkbox"
+                                    value={checkList[page - 1]}
+                                    checked = {checkList[page - 1][index]}
+                                    name ={answers}  
+                                    
+                                    onChange={(event) => {
+                                        handleCheck(event, index)
+                                    }}
+                                />
+                                <label htmlFor={index}> {answers} </label>
+                            </div>
+                        )}
+                        {page < 3 ? (
                         <button
-                            type="button"
-                            onClick={handleSubmit}
-                            disabled={checked.length === 0}
-                        >Submit
-                        </button>
-                    )} 
-                </form>
+                                type="button"
+                                onClick={handleNext}
+                                disabled={checked.length === 0}
+                            >Next
+                            </button>
+                        ) : (
+                            <button
+                                type="button"
+                                onClick={handleSubmit}
+                                disabled={checked.length === 0}
+                            >Submit
+                            </button>
+                        )} 
+                    </form>
+                </div>
             </div>
         );    
     }
