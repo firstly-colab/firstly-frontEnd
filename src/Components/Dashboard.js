@@ -40,7 +40,7 @@ const Dashboard = () => {
                     <p className="favorites">Your Favorites (x)</p>
                     <button 
                         onClick={handleAll}
-                        className="expand">
+                        className="expand smallfont">
                         See all
                     </button>
                 </div>

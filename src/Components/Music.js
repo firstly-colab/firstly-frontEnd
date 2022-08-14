@@ -34,7 +34,7 @@ const Music = () => {
                 </IconButton>
                 <p>Remember to just have fun... You have nothing to lose!</p>
                 <img src={Illustration2} alt="an illustration of a male and female head"></img>
-                <p>Here’s a song to pump you up:</p>
+                <p>Here’s a playlist to pump you up:</p>
 
 
                 <button
