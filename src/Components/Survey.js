@@ -102,16 +102,6 @@ const Survey = () => {
         event.preventDefault();
         console.log(checked, "submitted list")
         setPage(page + 1)
-        
-        // if (page < 3) {
-        //     setPage(page + 1)
-        // }
-        // else {
-            
-        //     <Results page={page} setPage={setPage}/>
-        //     navigate("/survey/results")
-        // }
-        // setChecked([])
     };
 
     const handleSubmit = () => {
