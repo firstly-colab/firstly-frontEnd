@@ -22,7 +22,7 @@ const Results = () => {
     
     const getResult = async () => {
         try {
-            const response = await fetch('http://localhost:3001/result', {
+            const response = await fetch('https://mellow-colab.herokuapp.com/result', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -55,7 +55,7 @@ const Results = () => {
                 </IconButton>
                 <p>Here are some conversation starters for you, Shannon:</p>
                 {result.map(dialogue => {
-                    return (<div>
+                    return (<div key = {dialogue.id}>
                         <h4>{dialogue.dialogue}</h4>
                     </div>
                 )})}
