@@ -53,7 +53,7 @@ const LoginPage = () => {
 						Email
 						<input 
 							type="text" 
-							name="name" 
+							name="email" 
 							placeholder="Enter your email" 
 							onChange={(event) => setEmail(event.target.value)}
 							value = {email}

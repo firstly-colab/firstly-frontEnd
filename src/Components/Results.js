@@ -15,9 +15,24 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 
 const Results = () => {
 
+    const surveyArray = [
+        "Too serious",
+        "Doesn’t apply to me",
+        "Not comfortable asking this",
+        "Other"
+    ]
+
     const navigate = useNavigate();
     const {checked, setChecked} = useContext(Context)
     const [result, setResult] = useState([])
+    const [isLoading, setIsLoading] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
+
+    const [modal, setModal] = useState(false);
+
+    const toggleModal = () => {
+        setModal(!modal);
+    };
 
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
@@ -32,6 +47,7 @@ const Results = () => {
     
     const getResult = async () => {
         try {
+            setIsLoading(true);
             const response = await fetch('https://mellow-colab.herokuapp.com/result', {
                 method: 'POST',
                 headers: {
@@ -44,6 +60,7 @@ const Results = () => {
             const data = await response.json();
             console.log("data", data)
             setResult(data)
+            setIsLoading(false);
         } catch (error) {
             console.log(error)
         }
@@ -53,9 +70,22 @@ const Results = () => {
         getResult();
     }, [])
 
+    const handleRefresh = (event) => {
+        event.preventDefault();
+        console.log("new question comes")
+    }
+
     console.log(result)
     return (
+        
         <div className="results">
+
+            {isLoading ? 
+            <div className="spinnerContainer"> 
+                <p>Loading some fun questions for you</p>
+                <div className="loadingSpinner">
+                </div>
+            </div> : 
             <div className="wrapper">
                 <IconButton
                     type="button"
@@ -63,31 +93,59 @@ const Results = () => {
                     className="arrowStyle">
                     <ArrowBackIcon />
                 </IconButton>
+
                 <p>Here are some conversation starters for you, Shannon:</p>
+
                 {result.map(dialogue => {
-                    return (<div key = {dialogue.id}>
+                    return (<div key={dialogue.id}>
                         <div className="ontop">
-                            <p className="smallfont">Foodie</p>
+                            <p className="smallfont">{dialogue.category}</p>
+
                             <div className="boxStyle">
-                                <Checkbox {...label} 
-                                icon={<FavoriteBorder 
-                                className="icon" />} 
-                                checkedIcon={<Favorite 
-                                className="iconbutton" />}
+
+                                <Checkbox {...label}
+                                    icon={<FavoriteBorder
+                                        className="icon" />}
+                                    checkedIcon={<Favorite
+                                        className="iconbutton" />}
                                 />
+
                                 <img src={dance} alt="1" />
                                 <p>{dialogue.dialogue}</p>
                                 <h3>{dialogue.dialogue}</h3>
-                                <IconButton>
+
+                                <IconButton
+                                    onClick={toggleModal}>
                                     <RefreshIcon
-                                    className="icon" />
+                                        className="icon" />
                                 </IconButton>
+
                             </div>
                         </div>
                     </div>
-                )})}
+                    )
+                })}
+                {modal && (
+                    <div className="modal">
+                        <div onClick={toggleModal} className="overlay"></div>
+                        <form className="modalContent">
+                            <h3>Okay! Tell us why:</h3>
+                            {surveyArray.map((survey, index) =>
+                                <div className="flexRadio" key={index}>
+                                    <input
+                                        id={index}
+                                        type="radio"
+                                        name="selected"
+                                    />
+                                    <label htmlFor={index}>{survey}</label>
+                                </div>
+                            )}
+                            <button className="refresh" onClick={handleRefresh}>Send</button>
+                        </form>
+                    </div>
+                )}
                 <button className="complete" onClick={handleSubmit}>Complete</button>
-            </div>
+            </div>}         
         </div>
     );
 };

@@ -526,6 +526,13 @@ a {
 .results p {
   margin: 30px 0 60px 0;
 }
+.results .modalContent {
+  align-items: flex-start;
+  padding: 25px 15px;
+}
+.results .modalContent h3 {
+  margin: 0 auto 20px auto;
+}
 .boxStyle {
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
   padding: 5px 2px 5px 15px;
@@ -564,6 +571,65 @@ a {
 .complete {
   width: 100%;
   margin: 100px 0 50px 0;
+}
+.flexRadio {
+  display: flex;
+  align-items: center;
+  text-align: left;
+}
+input[type="radio"] {
+  appearance: none;
+  margin: 10px 20px 10px 5px;
+  color: #000;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #000;
+  border-radius: 50%;
+  display: grid;
+  place-content: center;
+}
+input[type="radio"]::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  background-color: #000;
+}
+input[type="radio"]:checked::before {
+  transform: scale(1);
+}
+.refresh {
+  margin: 20px auto 0 auto;
+}
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.spinnerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.spinnerContainer p {
+  margin: 30px 0;
+}
+.loadingSpinner {
+  width: 50px;
+  height: 50px;
+  border: 10px solid #f3f3f3;
+  border-top: 10px solid #000;
+  border-radius: 50%;
+  animation: spinner 1.5s linear infinite;
 }
 .music .arrowStyle {
   margin: 50px 0 0 0;
