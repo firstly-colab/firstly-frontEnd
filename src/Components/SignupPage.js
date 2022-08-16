@@ -13,7 +13,7 @@ const SignupPage = () => {
 
     const navigate = useNavigate()
     async function register () {
-		const response = await fetch('http://localhost:3001/register', {
+		const response = await fetch('https://mellow-colab.herokuapp.com/register', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
