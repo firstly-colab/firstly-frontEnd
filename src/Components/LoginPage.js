@@ -39,6 +39,10 @@ const LoginPage = () => {
 		login();
 	};
 
+	const goToLogin = () => {
+		navigate('/signup')
+	}
+
 	return (
         <div className="login">
 			<div className="wrapper">
@@ -69,7 +73,8 @@ const LoginPage = () => {
 					{message && <p> {message} </p>}
 					<button onClick={handleSubmit}>Log in</button>
 				</form>
-				<p>Don't have an account? <a href= "/signup"> Sign up </a></p>
+				<p>Don't have an account?</p>
+				<button onClick = {goToLogin}> Sign up </button>
 			</div>
 		</div>
 	);

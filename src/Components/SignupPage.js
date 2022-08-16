@@ -39,6 +39,9 @@ const SignupPage = () => {
         register()
     }
 
+	const goToSignup = () => {
+		navigate('/login')
+	}
 
     return (
         <div className="signup">
@@ -80,7 +83,8 @@ const SignupPage = () => {
 					{message && <p> {message} </p>}
 					<button onClick={handleSubmit}>Sign up</button>
 				</form>
-				<p>Already have an account? <a href= "/login"> Log in </a></p>
+				<p>Already have an account? </p>
+				<button onClick = {goToSignup}> Log in </button>
 			</div>
 		</div>
     )
