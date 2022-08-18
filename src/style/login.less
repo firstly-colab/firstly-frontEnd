@@ -1,9 +1,17 @@
-.login {
+.login, .signup {
     h2 {
         margin: 100px 0 0 0;
     }
     p {
         margin: 20px 0 50px 0;
+        &:nth-child(4) {
+            margin: 100px 0 100px 0;
+            display: inline;
+            font-weight: 400;
+            font-size: 0.875rem;
+            line-height: 1.5rem;
+            letter-spacing: 0.013rem;
+        }
     }
     form {
         label {
@@ -20,7 +28,15 @@
             }
         }
         button {
-            margin: 40px auto;
+            margin: 0 auto;
         }
     }
+}
+
+.signUp {
+    color: @black;
+    background-color: @lightgrey;
+    text-decoration: underline;
+    padding: 5px;
+    margin: 100px 0 100px 0;
 }

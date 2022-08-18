@@ -46,7 +46,7 @@ const LoginPage = () => {
 	return (
         <div className="login">
 			<div className="wrapper">
-				<h2>Sign up to get started!</h2>
+				<h2>Log In!</h2>
 				<p>One step closer to curated conversation starters for your first date.</p>
 				<form>
 					<label>
@@ -74,7 +74,7 @@ const LoginPage = () => {
 					<button onClick={handleSubmit}>Log in</button>
 				</form>
 				<p>Don't have an account?</p>
-				<button onClick = {goToLogin}> Sign up </button>
+				<button className="signUp" onClick = {goToLogin}> Sign up </button>
 			</div>
 		</div>
 	);

@@ -6,7 +6,6 @@ import { IconButton } from "@mui/material";
 
 const Dashboard = () => {
 
-
     const [page, setPage] = useState(0)
     const [user, setUser] = useState(JSON.parse(window.localStorage.getItem("user")))
     console.log(user)
@@ -17,13 +16,13 @@ const Dashboard = () => {
         navigate("/survey")
     };
 
-    const handleAll = () => {
-        setPage(page + 1)
-    }
+    // const handleAll = () => {
+    //     setPage(page + 1)
+    // }
 
-    const handleBack = () => {
-        setPage(page - 1)
-    };
+    // const handleBack = () => {
+    //     setPage(page - 1)
+    // };
     
     const handleLogout = () => {
         window.localStorage.removeItem("token")
@@ -47,40 +46,40 @@ const Dashboard = () => {
                 <button className="takeQuestionaire" onClick={handleSubmit}>Take questionnaire </button>
                 <div className="flexDashboard">
                     <p className="favorites">Your Favorites (x)</p>
-                    <button 
+                    {/* <button 
                         onClick={handleAll}
                         className="expand smallfont">
                         See all
-                    </button>
+                    </button> */}
                 </div>
             </div>
-            <div className="seeAll">
+            {/* <div className="seeAll">
                 <img src={happychatting} alt="an illustration of a male and female head"></img>
-            </div>
+            </div> */}
         </div>
         );
     }
 
-    else {
-        return (
-            <div className="dashboard">
-                <div className="dashboxcontainer">
-                    <IconButton
-                        type="button"
-                        onClick={handleBack}
-                        className="arrowbutton">
-                        <ArrowBackIcon />
-                    </IconButton>
-                    <h1>
-                        Firstly
-                    </h1>
-                </div>
-                <div className="wrapper">
-                    <p>Favourites (x)</p>
-                </div>
-            </div>
-        );
-    }
-};
+    // else {
+    //     return (
+    //         <div className="dashboard">
+    //             <div className="dashboxcontainer">
+    //                 <IconButton
+    //                     type="button"
+    //                     onClick={handleBack}
+    //                     className="arrowbutton">
+    //                     <ArrowBackIcon />
+    //                 </IconButton>
+    //                 <h1>
+    //                     Firstly
+    //                 </h1>
+    //             </div>
+    //             <div className="wrapper">
+    //                 <p>Favourites (x)</p>
+    //             </div>
+    //         </div>
+    //     );
+    // }
+// };
 
 export default Dashboard;

@@ -83,8 +83,8 @@ const SignupPage = () => {
 					{message && <p> {message} </p>}
 					<button onClick={handleSubmit}>Sign up</button>
 				</form>
-				<p>Already have an account? </p>
-				<button onClick = {goToSignup}> Log in </button>
+				<p>Already have an account?</p>
+				<button className='signUp' onClick = {goToSignup}> Log in </button>
 			</div>
 		</div>
     )

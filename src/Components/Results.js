@@ -26,7 +26,6 @@ const Results = () => {
     const {checked, setChecked} = useContext(Context)
     const [result, setResult] = useState([])
     const [isLoading, setIsLoading] = useState(false);
-    const [errorMessage, setErrorMessage] = useState("");
 
     const [modal, setModal] = useState(false);
 
@@ -59,8 +58,11 @@ const Results = () => {
             })
             const data = await response.json();
             console.log("data", data)
-            setResult(data)
-            setIsLoading(false);
+            //wait 2 seconds before loading state turns back to false (loading spinner)
+            setTimeout(function () {
+                setResult(data)
+                setIsLoading(false);
+            }, 2000)
         } catch (error) {
             console.log(error)
         }
