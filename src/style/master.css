@@ -317,7 +317,8 @@ h3 {
   line-height: 1.5rem;
   letter-spacing: 0.008rem;
 }
-.login p {
+.login p,
+.signup p {
   font-size: 1rem;
   line-height: 1.5rem;
   letter-spacing: 0.02rem;
@@ -365,33 +366,64 @@ a {
   letter-spacing: 0.038rem;
   font-weight: 500;
 }
+.signUp {
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  letter-spacing: 0.013rem;
+}
 .home p {
   padding: 30px 0;
 }
 .home h1 {
   margin: 100px 0 50px 0;
 }
-.login h2 {
+.home button {
+  margin: 0 0 100px 0;
+}
+.login h2,
+.signup h2 {
   margin: 100px 0 0 0;
 }
-.login p {
+.login p,
+.signup p {
   margin: 20px 0 50px 0;
 }
-.login form label {
+.login p:nth-child(4),
+.signup p:nth-child(4) {
+  margin: 100px 0 100px 0;
+  display: inline;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  letter-spacing: 0.013rem;
+}
+.login form label,
+.signup form label {
   display: flex;
   flex-direction: column;
   text-align: left;
 }
-.login form input {
+.login form input,
+.signup form input {
   padding: 6px 8px;
   border: 1px solid rgba(0, 0, 0, 0.5);
   border-radius: 4px;
 }
-.login form input::placeholder {
+.login form input::placeholder,
+.signup form input::placeholder {
   letter-spacing: 0.02rem;
 }
-.login form button {
-  margin: 40px auto;
+.login form button,
+.signup form button {
+  margin: 0 auto;
+}
+.signUp {
+  color: #000;
+  background-color: #FAFBFF;
+  text-decoration: underline;
+  padding: 5px;
+  margin: 100px 0 100px 0;
 }
 .dashboard h1 {
   margin: 0 auto;
@@ -450,7 +482,7 @@ a {
   height: auto;
 }
 .survey button {
-  margin: 100px 0 50px 0;
+  margin: 100px 0 100px 0;
 }
 .flex {
   display: flex;
@@ -517,7 +549,7 @@ a {
   background-color: #54B3AF;
 }
 .questions button {
-  margin: 100px 0 50px 0;
+  margin: 100px 0 100px 0;
 }
 .results .arrowStyle {
   margin: 50px 0 0 0;
@@ -535,7 +567,7 @@ a {
 }
 .boxStyle {
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
-  padding: 5px 2px 5px 15px;
+  padding: 15px;
   position: relative;
   background-color: #fff;
   border-radius: 0 4px 4px 4px;
@@ -570,7 +602,7 @@ a {
 }
 .complete {
   width: 100%;
-  margin: 100px 0 50px 0;
+  margin: 100px 0 100px 0;
 }
 .flexRadio {
   display: flex;
@@ -663,7 +695,7 @@ input[type="radio"]:checked::before {
   color: #000;
 }
 .music .submit {
-  margin: 100px 0 50px 0;
+  margin: 100px 0 100px 0;
 }
 .modal,
 .overlay {
