@@ -6,8 +6,9 @@ import { IconButton } from "@mui/material";
 
 const Dashboard = () => {
 
-
-    // const [page, setPage] = useState(0)
+    const [page, setPage] = useState(0)
+    const [user, setUser] = useState(JSON.parse(window.localStorage.getItem("user")))
+    console.log(user)
 
     const navigate = useNavigate();
 
@@ -23,16 +24,23 @@ const Dashboard = () => {
     //     setPage(page - 1)
     // };
     
-    // if (page === 0) {
+    const handleLogout = () => {
+        window.localStorage.removeItem("token")
+        window.localStorage.removeItem("user")
+        window.localStorage.removeItem("isLoggedIn")
+        navigate('/login')
+    }
+
+    if (page === 0) {
 
     return (
         <div className="dashboard">
             <div className="dashboxcontainer">
                 <h1>Firstly</h1>
-                <button className="logout">Log out</button>
+                <button className="logout" onClick={handleLogout}>Log out</button>
             </div>
             <div className="wrapper">
-                <p>Hi Shannon!</p>
+                <p>Hi {user.name[0].toUpperCase() + user.name.slice(1)}!</p>
                 <img src={happychatting} alt="an illustration of a male and female chatting"></img>
                 <p>Going on a date? We’ll help you keep the conversation flowin’</p>
                 <button className="takeQuestionaire" onClick={handleSubmit}>Take questionnaire </button>
