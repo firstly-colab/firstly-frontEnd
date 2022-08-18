@@ -436,15 +436,9 @@ a {
   display: flex;
   justify-content: space-between;
 }
-.dashboard .favorites,
-.dashboard .expand {
+.dashboard .favorites {
   margin: 10px 0;
   padding: 7px;
-}
-.dashboard .expand {
-  background-color: #FAFBFF;
-  color: #000;
-  text-decoration: underline;
 }
 .dashboard .takeQuestionaire {
   margin: 0 0 40px 0;
@@ -458,10 +452,6 @@ a {
   position: relative;
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
 }
-.dashboxcontainer .arrowbutton {
-  position: absolute;
-  left: 10%;
-}
 .logout {
   position: absolute;
   right: 10%;
@@ -469,10 +459,6 @@ a {
   padding: 0;
   color: #000;
   text-decoration: underline;
-}
-.seeAll {
-  background-color: #DCEAE9;
-  padding: 0 0 0 0;
 }
 .survey p {
   margin: 100px 0 50px 0;
