@@ -28,9 +28,14 @@ const Results = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     const [modal, setModal] = useState(false);
+    const [modalOne, setModalOne] = useState(false);
 
     const toggleModal = () => {
         setModal(!modal);
+    };
+
+    const toggleHeartModal = () => {
+        setModalOne(!modalOne);
     };
 
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -107,12 +112,13 @@ const Results = () => {
 
                                 <Checkbox {...label}
                                     icon={<FavoriteBorder
-                                        className="icon" />}
+                                    className="icon" />}
                                     checkedIcon={<Favorite
-                                        className="iconbutton" />}
+                                    className="iconbutton" />
+                                }
                                 />
 
-                                <img src={dance} alt="1" />
+                                <img src={dance} alt="illustration" />
                                 <p>{dialogue.dialogue}</p>
                                 <h3>{dialogue.dialogue}</h3>
 
@@ -127,6 +133,14 @@ const Results = () => {
                     </div>
                     )
                 })}
+                {modalOne && (
+                    <div className="modal">
+                        <div onClick={toggleHeartModal} className="overlay"></div>
+                        <div className="modalContent">
+                            <h3>Saved to Favorites!</h3>
+                        </div>
+                    </div>
+                )}
                 {modal && (
                     <div className="modal">
                         <div onClick={toggleModal} className="overlay"></div>
@@ -146,6 +160,7 @@ const Results = () => {
                         </form>
                     </div>
                 )}
+
                 <button className="complete" onClick={handleSubmit}>Complete</button>
             </div>}         
         </div>
