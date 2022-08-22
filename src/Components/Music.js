@@ -3,11 +3,14 @@ import { useNavigate } from "react-router-dom";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { IconButton } from "@mui/material";
 import PlayCircleIcon from '@mui/icons-material/PlayCircle'; 
-import { useState } from "react";
+import { useState, useContext } from "react";
+import Context from '../context/Context'
 
 const Music = () => {
 
     const [modal, setModal] = useState(false);
+    const { setChecked } = useContext(Context)
+
 
     const toggleModal = () => {
         setModal(!modal);
@@ -16,6 +19,7 @@ const Music = () => {
     const navigate = useNavigate();
 
     const handleSubmit = () => {
+        setChecked([])
         navigate("/dashboard")
     };
 

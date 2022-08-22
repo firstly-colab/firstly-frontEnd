@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
+import Context from '../context/Context'
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 const LoginPage = () => {
@@ -7,6 +8,7 @@ const LoginPage = () => {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const [message, setMessage] = useState('')
+	const { user, setUser } = useContext(Context)
 
 	const navigate = useNavigate();
 
@@ -25,21 +27,28 @@ const LoginPage = () => {
 
 		if (!data.token) {
 			setMessage(data)
-			return
+			return;
 		} 
 		setMessage('')
 		window.localStorage.setItem("token", data.token)
 		window.localStorage.setItem("user", JSON.stringify(data.user))
 		window.localStorage.setItem("isLoggedIn", true)
+		setUser(data.user)
 		navigate('/dashboard')
 	}
 
 	const handleSubmit = (event) => {
 		event.preventDefault()
-		login();
+		if (!email && !password) {
+			setMessage('The above fields are required')
+		} else {
+			setMessage("")
+			login();
+		}
+		
 	};
 
-	const goToLogin = () => {
+	const goToSignup = () => {
 		navigate('/signup')
 	}
 
@@ -74,7 +83,7 @@ const LoginPage = () => {
 					<button onClick={handleSubmit}>Log in</button>
 				</form>
 				<p>Don't have an account?</p>
-				<button className="signUp" onClick = {goToLogin}> Sign up </button>
+				<button className="signUp" onClick = {goToSignup}> Sign up </button>
 			</div>
 		</div>
 	);

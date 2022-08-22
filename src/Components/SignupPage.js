@@ -39,7 +39,7 @@ const SignupPage = () => {
         register()
     }
 
-	const goToSignup = () => {
+	const goToLogin = () => {
 		navigate('/login')
 	}
 
@@ -84,7 +84,7 @@ const SignupPage = () => {
 					<button onClick={handleSubmit}>Sign up</button>
 				</form>
 				<p>Already have an account?</p>
-				<button className='signUp' onClick = {goToSignup}> Log in </button>
+				<button className='signUp' onClick = {goToLogin}> Log in </button>
 			</div>
 		</div>
     )
