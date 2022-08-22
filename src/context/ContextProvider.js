@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Context from "./Context";
 
 export default function ContextProvider({children}) {
     const [checked, setChecked] = useState([]);
+    const [user, setUser] = useState({})
 
     const context = {
         checked,
-        setChecked
+        setChecked,
+        user,
+        setUser
     }
 
     return (
