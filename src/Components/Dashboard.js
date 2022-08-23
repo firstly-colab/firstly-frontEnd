@@ -2,15 +2,44 @@ import { useNavigate } from "react-router-dom";
 import happychatting from "../assets/happychatting.svg"
 import { useState, useContext, useEffect } from "react";
 import Context from '../context/Context'
-// import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-// import { IconButton } from "@mui/material";
-
+import Checkbox from '@mui/material/Checkbox';
+import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+import Favorite from '@mui/icons-material/Favorite';
+//pics
+import food from '../assets/food.svg'
+import family from '../assets/family.svg'
+import friends from '../assets/friends.svg'
+import hike from '../assets/hike.svg'
+import hobbies from '../assets/hobbies.svg'
+import humor from '../assets/humor.svg'
+import music from '../assets/music.svg'
+import netflix from '../assets/netflix.svg'
+import outdoorsy from '../assets/outdoorsy.svg'
+import pet from '../assets/pet.svg'
+import travel from '../assets/travel.svg'
+import newThings from '../assets/trying-new.svg'
 const Dashboard = () => {
+
+    const tagLine = {
+        "Foodie" : ["Because being a foodie is important...", food],
+        "Loves to travel" : ["Since having a travel bug is necessary...", travel],
+        "Pet lover" : ["Because having a pet always wins...", pet],
+        "Friends oriented" : ["Everyone should have friends...", friends],
+        "Outdoorsy" : ["Nature is the best healer...", outdoorsy],
+        "Humorous" : ["Who doesn't love a good laugh...", humor],
+        "Family oriented" : ["Because family is the best...", family],
+        "Passionate about personal hobbies" : ["Because hobbies are for your soul...", hobbies],
+        "Open to trying new things" : ["Here curiosity doesn't kill the cat...", newThings],
+        "Music lover" : ["Everyone needs a song rec...", music],
+        "Netflix & Chill-er" : ["Because why not...", netflix],
+        "Planning the next hike" : ["View is always better from the top...", hike]
+    }
 
     const [page, setPage] = useState(0)
     const { user, setUser } = useContext(Context)
     const [favorites, setFavorites] = useState([])
     
+    const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
     const navigate = useNavigate();
 
@@ -57,15 +86,32 @@ const Dashboard = () => {
                 <img src={happychatting} alt="an illustration of a male and female chatting"></img>
                 <p>Going on a date? We’ll help you keep the conversation flowin’</p>
                 <button className="takeQuestionaire" onClick={handleSubmit}>Take questionnaire </button>
-                <div className="flexDashboard">
                     <p className="favorites">Your Favorites ({ favorites.length })</p>
                     {favorites.length > 0 ?
-                        favorites.map(ques => {
+                        favorites.map(dialogue => {
                         //cards for showing the favorites
                         return (
-                            <div key = {ques.id}>
-                                <p>{ques.dialogue}</p>
-                            </div> 
+                                <div key={dialogue.id}>
+                                <div className="ontop">
+                                    <p className="smallfont">{dialogue.category}</p>
+        
+                                    <div className="boxStyle">
+        
+                                        <Checkbox {...label}
+                                            icon={<FavoriteBorder
+                                                className="icon" />}
+                                            checkedIcon={<Favorite
+                                                className="iconbutton" />}
+                                            // onClick = {(event) => {
+                                            //     handleLike(event, dialogue.id)
+                                            // }}
+                                        />
+        
+                                        <img src={tagLine[dialogue.category][1]} alt="1" />
+                                        <h3>{dialogue.dialogue}</h3>
+                                    </div>
+                                </div>
+                                </div>
                         ) 
                         }): <p>No saved questions. Please take the questionnaire.</p>
 
@@ -73,7 +119,6 @@ const Dashboard = () => {
                     
                 </div>
             </div>
-        </div>
         );
     }
 }

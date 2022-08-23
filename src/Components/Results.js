@@ -3,15 +3,27 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { IconButton } from "@mui/material";
 import { useState, useContext, useEffect } from "react";
 import dance from "../assets/dance.svg"
-// import axios from 'axios'
 import Context from '../context/Context'
-
 
 import * as React from 'react';
 import Checkbox from '@mui/material/Checkbox';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
 import RefreshIcon from '@mui/icons-material/Refresh';
+
+//pics
+import food from '../assets/food.svg'
+import family from '../assets/family.svg'
+import friends from '../assets/friends.svg'
+import hike from '../assets/hike.svg'
+import hobbies from '../assets/hobbies.svg'
+import humor from '../assets/humor.svg'
+import music from '../assets/music.svg'
+import netflix from '../assets/netflix.svg'
+import outdoorsy from '../assets/outdoorsy.svg'
+import pet from '../assets/pet.svg'
+import travel from '../assets/travel.svg'
+import newThings from '../assets/trying-new.svg'
 
 const Results = () => {
 
@@ -21,6 +33,21 @@ const Results = () => {
         "Not comfortable asking this",
         "Other"
     ]
+
+    const tagLine = {
+        "Foodie" : ["Because being a foodie is important...", food],
+        "Loves to travel" : ["Since having a travel bug is necessary...", travel],
+        "Pet lover" : ["Because having a pet always wins...", pet],
+        "Friends oriented" : ["Everyone should have friends...", friends],
+        "Outdoorsy" : ["Nature is the best healer...", outdoorsy],
+        "Humorous" : ["Who doesn't love a good laugh...", humor],
+        "Family oriented" : ["Because family is the best...", family],
+        "Passionate about personal hobbies" : ["Because hobbies are for your soul...", hobbies],
+        "Open to trying new things" : ["Here curiosity doesn't kill the cat...", newThings],
+        "Music lover" : ["Everyone needs a song rec...", music],
+        "Netflix & Chill-er" : ["Because why not...", netflix],
+        "Planning the next hike" : ["View is always better from the top...", hike]
+    }
 
     const navigate = useNavigate();
     const {checked, setChecked, user} = useContext(Context)
@@ -129,8 +156,9 @@ const Results = () => {
                 <p>Loading some fun questions for you</p>
                 <div className="loadingSpinner">
                 </div>
-            </div> : 
-            <div className="wrapper">
+            </div> :
+            <div className = "wrapper"> 
+            {/* <div className="flexDashboard"> */}
                 <IconButton
                     type="button"
                     onClick={handleBack}
@@ -158,8 +186,8 @@ const Results = () => {
                                         }}
                                     />
     
-                                    <img src={dance} alt="1" />
-                                    <p>{dialogue.dialogue}</p>
+                                    <img src={tagLine[dialogue.category][1]} alt="1" />
+                                    <p>{tagLine[dialogue.category][0]}</p>
                                     <h3>{dialogue.dialogue}</h3>
     
                                     <IconButton
@@ -203,6 +231,7 @@ const Results = () => {
                     </div>
                 )}
                 <button className="complete" onClick={handleSubmit}>Complete</button>
+            {/* </div> */}
             </div>}         
         </div>
     );
