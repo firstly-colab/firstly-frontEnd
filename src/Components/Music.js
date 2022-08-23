@@ -34,7 +34,8 @@ const Music = () => {
                     type="button"
                     onClick={handleBack}
                     className="arrowStyle">
-                    <ArrowBackIcon />
+                    <ArrowBackIcon 
+                    className="colorArrow"/>
                 </IconButton>
                 <p>Remember to just have fun... You have nothing to lose!</p>
                 <img src={Illustration2} alt="an illustration of a male and female head"></img>
@@ -60,7 +61,7 @@ const Music = () => {
                         <div onClick={toggleModal} className="overlay"></div>
                         <div className="modalContent">
                             <h3>Listen to Confidence Boost?</h3>
-                            <a href="https://www.spotify.com">Open Spotify</a>
+                            <a href="https://open.spotify.com/playlist/37i9dQZF1DX4fpCWaHOned">Open Spotify</a>
                         </div>
                     </div>
                 )}

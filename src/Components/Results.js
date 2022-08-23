@@ -5,11 +5,13 @@ import { useState, useContext, useEffect } from "react";
 import dance from "../assets/dance.svg"
 import Context from '../context/Context'
 
+
 import * as React from 'react';
 import Checkbox from '@mui/material/Checkbox';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
 import RefreshIcon from '@mui/icons-material/Refresh';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
 //pics
 import food from '../assets/food.svg'
@@ -98,7 +100,8 @@ const Results = () => {
                 setResult(data)
                 setIsLoading(false);
             }, 2000)
-        } catch (error) {
+        } catch (error)
+             {
             console.log(error)
         }
         
@@ -106,6 +109,7 @@ const Results = () => {
 
     const handleRefresh = (event) => {
         event.preventDefault();
+        toggleModal()
         console.log("new Question comes now")
         setDisliked({...disliked, [currentDisliked] : true})
     }
@@ -168,7 +172,8 @@ const Results = () => {
                     type="button"
                     onClick={handleBack}
                     className="arrowStyle">
-                    <ArrowBackIcon />
+                    <ArrowBackIcon 
+                        className="colorArrow"/>
                 </IconButton>
 
                 <p>Here are some conversation starters for you, {user.name[0].toUpperCase() + user.name.slice(1)}:</p>
@@ -187,6 +192,7 @@ const Results = () => {
                                         checkedIcon={<Favorite
                                             className="iconbutton" />}
                                         onClick = {(event) => {
+                                            toggleHeartModal()
                                             handleLike(event, dialogue.id)
                                         }}
                                     />
@@ -212,7 +218,15 @@ const Results = () => {
                     })
                 )
                 }
-
+                {modalOne && (
+                    <div className="modal">
+                        <div onClick={toggleHeartModal} className="overlay"></div>
+                        <div className="modalContent">
+                            <h3>Saved to Favorites!</h3>
+                            <CheckCircleOutlineIcon className="circleCheckmark" />
+                        </div>
+                    </div>
+                )}
                 {modal && (
                     <div className="modal">
                         <div onClick={toggleModal} className="overlay"></div>
@@ -230,13 +244,14 @@ const Results = () => {
                             )}
                             <button className="refresh" 
                                 onClick={handleRefresh}
+                                
                             >Send
                             </button>
                         </form>
                     </div>
                 )}
 
-                <button className="complete" onClick={handleSubmit}>Complete</button>
+                <button className="complete" onClick={handleSubmit}>Finish</button>
             {/* </div> */}
             </div>}         
         </div>

@@ -271,6 +271,9 @@ form input {
 .submit {
   width: 100%;
 }
+.colorArrow {
+  color: #000;
+}
 @font-face {
   font-family: 'Shrikhand';
   font-style: normal;
@@ -450,6 +453,7 @@ a {
 .dashboard .favorites {
   margin: 10px 0;
   padding: 7px;
+  display: flex;
 }
 .dashboard .takeQuestionaire {
   margin: 0 0 40px 0;
@@ -471,8 +475,26 @@ a {
   color: #000;
   text-decoration: underline;
 }
+.noFavouritesYet img {
+  width: 70%;
+}
+.noFavouritesYet p:nth-child(2) {
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.688rem;
+  letter-spacing: 0.005rem;
+  color: rgba(0, 0, 0, 0.65);
+  margin: 15px 0 0 0;
+}
+.noFavouritesYet p:nth-child(3) {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  letter-spacing: 0.02rem;
+  color: rgba(0, 0, 0, 0.65);
+  margin: 5px 0 50px;
+}
 .survey p {
-  margin: 100px 0 50px 0;
+  margin: 30px 0 60px;
 }
 .survey img {
   width: 300px;
@@ -480,6 +502,10 @@ a {
 }
 .survey button {
   margin: 100px 0 100px 0;
+}
+.survey .arrowStyle {
+  margin: 50px 0 0 0;
+  display: flex;
 }
 .flex {
   display: flex;
@@ -534,8 +560,7 @@ a {
   transform: scale(0);
 }
 .questions div input[type=checkbox]:focus + label:before {
-  outline: #e80a0a solid 1px;
-  box-shadow: 0 0px 8px #000000;
+  box-shadow: 0 0px 4px #000000;
 }
 .questions div input[type=checkbox]:checked + label:before {
   background-color: #323232;
@@ -562,6 +587,10 @@ a {
 .results .modalContent h3 {
   margin: 0 auto 20px auto;
 }
+.results .circleCheckmark {
+  font-size: 3rem;
+  margin: 0 auto;
+}
 .boxStyle {
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
   padding: 15px;
@@ -571,6 +600,10 @@ a {
 }
 .boxStyle > p {
   text-align: left;
+}
+.boxStyle img {
+  margin: 0 auto 20px auto;
+  width: 80%;
 }
 .ontop {
   display: flex;
@@ -589,17 +622,22 @@ a {
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 .ontop p:nth-child(3) {
-  margin: 0 0 0 0;
+  margin: 0 0 10px 0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.125rem;
+  letter-spacing: 0.038rem;
 }
 .icon {
   color: #000;
+  font-size: 24px;
 }
 .iconbutton {
   color: #C9274D;
 }
 .complete {
   width: 100%;
-  margin: 100px 0 100px 0;
+  margin: 30px 0 100px 0;
 }
 .flexRadio {
   display: flex;

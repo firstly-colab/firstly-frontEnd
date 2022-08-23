@@ -81,14 +81,8 @@ const Survey = () => {
     const handleCheck = (event, index) => {
         const key = page - 1;
         const keyValue = checkList[key]
-        // console.log(key, "key")
-        // console.log(keyValue, "keyValue")
-        // console.log(!checkList, "!checklist")
         
         keyValue[index] = !keyValue[index]
-
-        // console.log(keyValue[index], "keyValue[index]")
-        // console.log(!keyValue[index], "!!!!!!!!!keyValue[index]")
         
         setCheckList({...checkList, [key] : keyValue})
         
@@ -96,30 +90,30 @@ const Survey = () => {
         if (event.target.checked) {
             list = [...checked, event.target.name];
         } else {
-            // console.log((event.target.name), "index of")
             list.splice(checked.indexOf(event.target.name), 1);
         }
         setChecked(list);
-        // console.log(array0, "array")
-        // console.log(checkList[page - 1], "checkList[page -1]")
 
-        // console.log(list, "list of items checked")
-        // console.log(checkList[3], "checkList[3]")
-
-        let result0 = checkList[0].every(element => element === false);
-        setArray0(result0)
-        console.log(array0, "result0")
-        let result1 = checkList[1].every(element => element === false);
-        setArray1(result1)
-        console.log(array1, "result1")
-        let result2 = checkList[2].every(element => element === false);
-        setArray2(result2)
-        console.log(array2, "result2")
+        // let result0 = checkList[0].every(element => element === false);
+        // setArray0(result0)
+        // console.log(array0, "result0")
+        // let result1 = checkList[1].every(element => element === false);
+        // setArray1(result1)
+        // console.log(array1, "result1")
+        // let result2 = checkList[2].every(element => element === false);
+        // setArray2(result2)
+        // console.log(array2, "result2")
     };
 
 
     const handleBack = () => {
+        if (page === 0) {
+            navigate('/dashboard')
+        }
+        else {
             setPage(page - 1)
+        }
+            
     };
 
 
@@ -133,13 +127,24 @@ const Survey = () => {
         navigate('/survey/results')
     }
 
+    
+
     //rendering section
     if (page === 0) {
         return (
             <div className="survey">
-                <p>Just a little reminder...</p>
-                <img src={yourock} alt="gif of a rock moving its eyes"></img>
-                <button onClick={() => setPage(1) }>Start</button>
+                <div className="wrapper">
+                    <IconButton
+                        type="button"
+                        onClick={handleBack}
+                        className="arrowStyle">
+                        <ArrowBackIcon
+                            className="colorArrow" />
+                    </IconButton>
+                    <p>Just a little reminder...</p>
+                    <img src={yourock} alt="gif of a rock moving its eyes"></img>
+                    <button onClick={() => setPage(1) }>Start</button>
+                </div>
             </div>
         );
     }
@@ -152,7 +157,8 @@ const Survey = () => {
                         <IconButton 
                             type="button" 
                             onClick={handleBack}>
-                            <ArrowBackIcon />
+                            <ArrowBackIcon 
+                                className="colorArrow"/>
                         </IconButton>
                         <img 
                             src={imageArray[page - 1].image} 
@@ -186,14 +192,15 @@ const Survey = () => {
                         <button
                                 type="button"
                                 onClick={handleNext}
-                                style={{ backgroundColor: array0 === true ? 'rgba(0, 0, 0, 0.5)' : 'black' }} 
+                                style={{ backgroundColor: checked.length === 0 ? 'rgba(0, 0, 0, 0.5)' : 'black' }} 
+                                disabled={checked.length === 0}
                             >Next
                             </button>
                         ) : ( 
                             <button
                                 type="button"
                                 onClick={handleSubmit}
-                                    disabled={array0 === true}
+                                disabled={checked.length === 0}
                             >Submit
                             </button>
                         )} 

@@ -18,6 +18,9 @@ import outdoorsy from '../assets/outdoorsy.svg'
 import pet from '../assets/pet.svg'
 import travel from '../assets/travel.svg'
 import newThings from '../assets/trying-new.svg'
+//no favourites
+import nofavourites from '../assets/nofavourites.svg'
+
 const Dashboard = () => {
 
     const tagLine = {
@@ -35,7 +38,6 @@ const Dashboard = () => {
         "Planning the next hike" : ["View is always better from the top...", hike]
     }
 
-    const [page, setPage] = useState(0)
     const { user, setUser } = useContext(Context)
     const [favorites, setFavorites] = useState([])
     
@@ -65,15 +67,14 @@ const Dashboard = () => {
 		const loggedIn = window.localStorage.getItem("isLoggedIn");
 
 		if (loggedIn) {
-		  const user = JSON.parse(window.localStorage.getItem("user"));
-		  setUser(user);
+		    const user = JSON.parse(window.localStorage.getItem("user"));
+		    setUser(user);
 		} else {
-		  navigate('/login')
+		    navigate('/login')
 		}
         getFavorites()
 	}, []);
 
-    if (page === 0) {
 
     return (
         <div className="dashboard">
@@ -113,7 +114,11 @@ const Dashboard = () => {
                                 </div>
                                 </div>
                         ) 
-                        }): <p>No saved questions. Please take the questionnaire.</p>
+                        }) : <div className="noFavouritesYet">
+                                <img src={nofavourites} alt="heart bubble"></img>
+                                <p>No favorites yet!</p>
+                                <p>Take the Firstly questionnaire to find and save your favorite conversation starters!</p>
+                            </div>
 
                     }
                     
@@ -121,5 +126,4 @@ const Dashboard = () => {
             </div>
         );
     }
-}
 export default Dashboard;

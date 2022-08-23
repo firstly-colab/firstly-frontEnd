@@ -13,6 +13,10 @@
             margin: 0 auto 20px auto;
         }
     }
+    .circleCheckmark {
+        font-size: 3rem;
+        margin: 0 auto;
+    }
 }
 
 .boxStyle {
@@ -23,6 +27,10 @@
     border-radius: 0 4px 4px 4px;
     >p {
         text-align: left;
+    }
+    img {
+        margin: 0 auto 20px auto;
+        width: 80%;
     }
 }
 
@@ -43,13 +51,18 @@
         box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
         }
         &:nth-child(3) {
-        margin: 0 0 0 0;
+        margin: 0 0 10px 0;
+        font-size: 0.75rem;
+        font-weight: 500;
+        line-height: 1.125rem;
+        letter-spacing: 0.038rem;
         }
     }
 }
 
 .icon {
     color: @black;
+    font-size: 24px;
 }
 
 .iconbutton {
@@ -58,7 +71,7 @@
 
 .complete {
     width: 100%;
-    margin: 100px 0 100px 0;
+    margin: 30px 0 100px 0;
 
 }
 
@@ -94,9 +107,9 @@ input[type="radio"]:checked::before {
     transform: scale(1);
 }
 
-input[type="radio"]:focus {
+// input[type="radio"]:focus {
 
-}
+// }
 
 .refresh {
     margin: 20px auto 0 auto;

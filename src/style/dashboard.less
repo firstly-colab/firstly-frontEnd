@@ -14,6 +14,7 @@
     // .expand {
         margin: 10px 0;
         padding: 7px;
+        display: flex;
     }
     // .expand {
     //     background-color: @lightgrey;
@@ -55,3 +56,26 @@
 //     background-color: @lightgreen;
 //     padding: 0 0 0 0;
 // }
+
+.noFavouritesYet {
+    img {
+        width: 70%;
+    }
+    p {
+        &:nth-child(2) {
+            font-size: 1.125rem;
+            font-weight: 500;
+            line-height: 1.688rem;
+            letter-spacing: 0.005rem;
+            color: rgba(0, 0, 0, 0.65);
+            margin: 15px 0 0 0;
+        }
+        &:nth-child(3) {
+        font-size: 1rem;
+        line-height: 1.5rem;
+        letter-spacing: 0.02rem;
+        color: rgba(0, 0, 0, 0.65);
+        margin: 5px 0 50px;
+        }
+    }
+}
