@@ -31,9 +31,14 @@ const Results = () => {
     const [disliked, setDisliked] = useState({});
 
     const [modal, setModal] = useState(false);
+    const [modalOne, setModalOne] = useState(false);
 
     const toggleModal = () => {
         setModal(!modal);
+    };
+
+    const toggleHeartModal = () => {
+        setModalOne(!modalOne);
     };
 
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -202,6 +207,7 @@ const Results = () => {
                         </form>
                     </div>
                 )}
+
                 <button className="complete" onClick={handleSubmit}>Complete</button>
             </div>}         
         </div>
