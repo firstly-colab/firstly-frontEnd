@@ -17,6 +17,7 @@ const Survey = () => {
     //States
     const [page, setPage] = useState(0)
     
+    
     //progress bar assets
     const imageArray = [
         {
@@ -67,18 +68,27 @@ const Survey = () => {
 
     //some more states and contexts
     const {checked, setChecked} = useContext(Context)
+    const [array0, setArray0] = useState([])
+    const [array1, setArray1] = useState([])
+    const [array2, setArray2] = useState([])
     const [checkList, setCheckList] = useState({
         0: new Array(questionArray[0].answers.length).fill(false),
         1: new Array(questionArray[1].answers.length).fill(false),
-        2: new Array(questionArray[2].answers.length).fill(false)
+        2: new Array(questionArray[2].answers.length).fill(false),
     })
 
     //event handling funtions
     const handleCheck = (event, index) => {
         const key = page - 1;
         const keyValue = checkList[key]
+        // console.log(key, "key")
+        // console.log(keyValue, "keyValue")
+        // console.log(!checkList, "!checklist")
         
         keyValue[index] = !keyValue[index]
+
+        // console.log(keyValue[index], "keyValue[index]")
+        // console.log(!keyValue[index], "!!!!!!!!!keyValue[index]")
         
         setCheckList({...checkList, [key] : keyValue})
         
@@ -86,12 +96,27 @@ const Survey = () => {
         if (event.target.checked) {
             list = [...checked, event.target.name];
         } else {
-            console.log((event.target.name), "index of")
+            // console.log((event.target.name), "index of")
             list.splice(checked.indexOf(event.target.name), 1);
         }
         setChecked(list);
-        console.log(list, "list of items checked")
+        // console.log(array0, "array")
+        // console.log(checkList[page - 1], "checkList[page -1]")
+
+        // console.log(list, "list of items checked")
+        // console.log(checkList[3], "checkList[3]")
+
+        let result0 = checkList[0].every(element => element === false);
+        setArray0(result0)
+        console.log(array0, "result0")
+        let result1 = checkList[1].every(element => element === false);
+        setArray1(result1)
+        console.log(array1, "result1")
+        let result2 = checkList[2].every(element => element === false);
+        setArray2(result2)
+        console.log(array2, "result2")
     };
+
 
     const handleBack = () => {
             setPage(page - 1)
@@ -152,6 +177,7 @@ const Survey = () => {
                                     onChange={(event) => {
                                         handleCheck(event, index)
                                     }}
+                                    
                                 />
                                 <label htmlFor={index}> {answers} </label>
                             </div>
@@ -160,14 +186,14 @@ const Survey = () => {
                         <button
                                 type="button"
                                 onClick={handleNext}
-                                disabled={checked.length === 0}
+                                style={{ backgroundColor: array0 === true ? 'rgba(0, 0, 0, 0.5)' : 'black' }} 
                             >Next
                             </button>
-                        ) : (
+                        ) : ( 
                             <button
                                 type="button"
                                 onClick={handleSubmit}
-                                disabled={checked.length === 0}
+                                    disabled={array0 === true}
                             >Submit
                             </button>
                         )} 

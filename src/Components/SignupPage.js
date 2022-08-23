@@ -53,7 +53,7 @@ const SignupPage = () => {
 						Name
 						<input 
 							type="text" 
-							name="Name" 
+							name="name" 
 							placeholder="Enter your first name" 
 							onChange={(event) => setName(event.target.value)}
 							value = {name}
@@ -63,7 +63,7 @@ const SignupPage = () => {
 						Email
 						<input 
 							type="text" 
-							name="Email" 
+							name="email" 
 							placeholder="Enter your email" 
 							onChange={(event) => setEmail(event.target.value)}
 							value = {email}
@@ -73,15 +73,21 @@ const SignupPage = () => {
 						Password
 						<input 
 							type="password" 
-							name="Password" 
+							name="password" 
 							placeholder="Enter your password"
 							onChange={(event) => setPassword(event.target.value)}
 							value = {password}
 							/>
-						<VisibilityOffIcon />
+						{/* <VisibilityOffIcon /> */}
 					</label>
 					{message && <p> {message} </p>}
-					<button onClick={handleSubmit}>Sign up</button>
+					<button 
+						onClick={handleSubmit}
+						style={{ backgroundColor: password.length === 0 || email.length === 0 || name.length === 0 ? 'rgba(0, 0, 0, 0.5)' : 'black' }}
+						disabled={password.length === 0 || email.length === 0 || name.length === 0}>
+							Sign up
+						
+					</button>
 				</form>
 				<p>Already have an account?</p>
 				<button className='signUp' onClick = {goToSignup}> Log in </button>

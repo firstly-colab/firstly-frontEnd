@@ -68,10 +68,14 @@ const LoginPage = () => {
 							onChange={(event) => setPassword(event.target.value)}
 							value = {password}
 							/>
-						<VisibilityOffIcon />
+						{/* <VisibilityOffIcon /> */}
 					</label>
 					{message && <p> {message} </p>}
-					<button onClick={handleSubmit}>Log in</button>
+					<button onClick={handleSubmit}
+						style={{ backgroundColor: password.length === 0 || email.length === 0 ? 'rgba(0, 0, 0, 0.5)' : 'black' }}
+						disabled={password.length === 0 || email.length === 0}
+						>Log in
+					</button>
 				</form>
 				<p>Don't have an account?</p>
 				<button className="signUp" onClick = {goToLogin}> Sign up </button>
