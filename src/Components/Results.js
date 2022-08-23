@@ -68,6 +68,12 @@ const Results = () => {
 
     const toggleHeartModal = () => {
         setModalOne(!modalOne);
+        if (modalOne === false) { setTimeout(() => {
+        setModalOne(modalOne);
+        }, 2000)}
+        else {
+            return
+        }
     };
 
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -101,7 +107,7 @@ const Results = () => {
                 setIsLoading(false);
             }, 2000)
         } catch (error)
-             {
+            {
             console.log(error)
         }
         
