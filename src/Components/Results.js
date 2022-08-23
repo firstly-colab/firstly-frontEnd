@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { IconButton } from "@mui/material";
-import { useState, useContext, useLayoutEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import dance from "../assets/dance.svg"
 // import axios from 'axios'
 import Context from '../context/Context'
@@ -17,15 +17,18 @@ const Results = () => {
 
     const surveyArray = [
         "Too serious",
-        "Doesn’t apply to me",
+        "Doesn't apply to me",
         "Not comfortable asking this",
         "Other"
     ]
 
     const navigate = useNavigate();
-    const {checked, setChecked} = useContext(Context)
+    const {checked, setChecked, user} = useContext(Context)
     const [result, setResult] = useState([])
     const [isLoading, setIsLoading] = useState(false);
+
+    const [currentDisliked, setCurrentDisliked] = useState(null)
+    const [disliked, setDisliked] = useState({});
 
     const [modal, setModal] = useState(false);
     const [modalOne, setModalOne] = useState(false);
@@ -62,7 +65,7 @@ const Results = () => {
                 })
             })
             const data = await response.json();
-            console.log("data", data)
+
             //wait 2 seconds before loading state turns back to false (loading spinner)
             setTimeout(function () {
                 setResult(data)
@@ -73,16 +76,55 @@ const Results = () => {
         }
         
     }
-    useLayoutEffect(() => {
-        getResult();
-    }, [])
 
     const handleRefresh = (event) => {
         event.preventDefault();
-        console.log("new question comes")
+        console.log("new Question comes now")
+        setDisliked({...disliked, [currentDisliked] : true})
     }
 
-    console.log(result)
+    const handleLike = async (e, question_id) => {
+        e.preventDefault()
+        try {
+            const response = await fetch('https://mellow-colab.herokuapp.com/liked-question', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    user_id : user.id,
+                    response_id : question_id
+                })   
+            })
+
+            const message = await response.json() //This message is string "Added to favorites" when liking is done (can choose what to do with it)
+            console.log(message)
+        } catch (error) {
+            console.log(error)
+        }
+        
+    }
+
+    useEffect(() => {
+        getResult();
+    }, [])
+
+    //here I am populating the arr threeShown which is used to render 3 ques as results, but when refresh is pressed it properly changes the ques
+    const threeShown = []
+    const populateThreeShown = () => {
+        let count = 0
+        result.forEach(ele => {
+            if (count < 3) {
+                if (!disliked[ele.id]) {
+                    threeShown.push(ele)
+                    count++
+                }
+            }
+        })
+    }
+    populateThreeShown();
+
+
     return (
         
         <div className="results">
@@ -101,46 +143,48 @@ const Results = () => {
                     <ArrowBackIcon />
                 </IconButton>
 
-                <p>Here are some conversation starters for you, Shannon:</p>
-
-                {result.map(dialogue => {
-                    return (<div key={dialogue.id}>
-                        <div className="ontop">
-                            <p className="smallfont">{dialogue.category}</p>
-
-                            <div className="boxStyle">
-
-                                <Checkbox {...label}
-                                    icon={<FavoriteBorder
-                                    className="icon" />}
-                                    checkedIcon={<Favorite
-                                    className="iconbutton" />
-                                }
-                                />
-
-                                <img src={dance} alt="illustration" />
-                                <p>{dialogue.dialogue}</p>
-                                <h3>{dialogue.dialogue}</h3>
-
-                                <IconButton
-                                    onClick={toggleModal}>
-                                    <RefreshIcon
-                                        className="icon" />
-                                </IconButton>
-
+                <p>Here are some conversation starters for you, {user.name[0].toUpperCase() + user.name.slice(1)}:</p>
+                {threeShown.length === 0 ? (<p>Sorry {user.name[0].toUpperCase() + user.name.slice(1)}, we ran out of questions. Please take the survey again.</p>) : 
+                (
+                    threeShown.map(dialogue => {
+                        return (<div key={dialogue.id}>
+                            <div className="ontop">
+                                <p className="smallfont">{dialogue.category}</p>
+    
+                                <div className="boxStyle">
+    
+                                    <Checkbox {...label}
+                                        icon={<FavoriteBorder
+                                            className="icon" />}
+                                        checkedIcon={<Favorite
+                                            className="iconbutton" />}
+                                        onClick = {(event) => {
+                                            handleLike(event, dialogue.id)
+                                        }}
+                                    />
+    
+                                    <img src={dance} alt="1" />
+                                    <p>{dialogue.dialogue}</p>
+                                    <h3>{dialogue.dialogue}</h3>
+    
+                                    <IconButton
+                                        onClick={() => {
+                                            toggleModal()
+                                            setCurrentDisliked(dialogue.id)
+                                        }
+                                        }>
+                                        <RefreshIcon
+                                            className="icon" />
+                                    </IconButton>
+    
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    )
-                })}
-                {modalOne && (
-                    <div className="modal">
-                        <div onClick={toggleHeartModal} className="overlay"></div>
-                        <div className="modalContent">
-                            <h3>Saved to Favorites!</h3>
-                        </div>
-                    </div>
-                )}
+                        )
+                    })
+                )
+                }
+
                 {modal && (
                     <div className="modal">
                         <div onClick={toggleModal} className="overlay"></div>
@@ -156,7 +200,10 @@ const Results = () => {
                                     <label htmlFor={index}>{survey}</label>
                                 </div>
                             )}
-                            <button className="refresh" onClick={handleRefresh}>Send</button>
+                            <button className="refresh" 
+                                onClick={handleRefresh}
+                            >Send
+                            </button>
                         </form>
                     </div>
                 )}

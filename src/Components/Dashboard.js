@@ -1,28 +1,22 @@
 import { useNavigate } from "react-router-dom";
 import happychatting from "../assets/happychatting.svg"
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
+import Context from '../context/Context'
 // import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 // import { IconButton } from "@mui/material";
 
 const Dashboard = () => {
 
     const [page, setPage] = useState(0)
-    const [user, setUser] = useState(JSON.parse(window.localStorage.getItem("user")))
-    console.log(user)
+    const { user, setUser } = useContext(Context)
+    const [favorites, setFavorites] = useState([])
+    
 
     const navigate = useNavigate();
 
     const handleSubmit = () => {
         navigate("/survey")
     };
-
-    // const handleAll = () => {
-    //     setPage(page + 1)
-    // }
-
-    // const handleBack = () => {
-    //     setPage(page - 1)
-    // };
     
     const handleLogout = () => {
         window.localStorage.removeItem("token")
@@ -30,6 +24,25 @@ const Dashboard = () => {
         window.localStorage.removeItem("isLoggedIn")
         navigate('/login')
     }
+
+    const getFavorites = async () => {
+        const response = await fetch(`https://mellow-colab.herokuapp.com/liked-question/${user.id}`)
+        const data = await response.json()
+        setFavorites(data)
+    }
+
+    //doesn't work as intended; will get to back to it later
+    useEffect(() => {
+		const loggedIn = window.localStorage.getItem("isLoggedIn");
+
+		if (loggedIn) {
+		  const user = JSON.parse(window.localStorage.getItem("user"));
+		  setUser(user);
+		} else {
+		  navigate('/login')
+		}
+        getFavorites()
+	}, []);
 
     if (page === 0) {
 
@@ -45,41 +58,23 @@ const Dashboard = () => {
                 <p>Going on a date? We’ll help you keep the conversation flowin’</p>
                 <button className="takeQuestionaire" onClick={handleSubmit}>Take questionnaire </button>
                 <div className="flexDashboard">
-                    <p className="favorites">Your Favorites (x)</p>
-                    {/* <button 
-                        onClick={handleAll}
-                        className="expand smallfont">
-                        See all
-                    </button> */}
+                    <p className="favorites">Your Favorites ({ favorites.length })</p>
+                    {favorites.length > 0 ?
+                        favorites.map(ques => {
+                        //cards for showing the favorites
+                        return (
+                            <div key = {ques.id}>
+                                <p>{ques.dialogue}</p>
+                            </div> 
+                        ) 
+                        }): <p>No saved questions. Please take the questionnaire.</p>
+
+                    }
+                    
                 </div>
             </div>
-            {/* <div className="seeAll">
-                <img src={happychatting} alt="an illustration of a male and female head"></img>
-            </div> */}
         </div>
         );
     }
-
-    // else {
-    //     return (
-    //         <div className="dashboard">
-    //             <div className="dashboxcontainer">
-    //                 <IconButton
-    //                     type="button"
-    //                     onClick={handleBack}
-    //                     className="arrowbutton">
-    //                     <ArrowBackIcon />
-    //                 </IconButton>
-    //                 <h1>
-    //                     Firstly
-    //                 </h1>
-    //             </div>
-    //             <div className="wrapper">
-    //                 <p>Favourites (x)</p>
-    //             </div>
-    //         </div>
-    //     );
-    // }
-// };
 }
 export default Dashboard;
