@@ -40,6 +40,7 @@ const Dashboard = () => {
 
     const { user, setUser } = useContext(Context)
     const [favorites, setFavorites] = useState([])
+    let [count, setCount] = useState(0)
     
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
@@ -62,6 +63,15 @@ const Dashboard = () => {
         setFavorites(data)
     }
 
+    const handleDislike = async (e, response_id) => {
+        e.preventDefault();
+        const response = await fetch(`https://mellow-colab.herokuapp.com/liked-question/${user.id}/${response_id}`, {
+            method: 'DELETE',
+        })
+        const message = await response.json()
+        console.log(message)
+    }
+
     //doesn't work as intended; will get to back to it later
     useEffect(() => {
 		const loggedIn = window.localStorage.getItem("isLoggedIn");
@@ -73,7 +83,7 @@ const Dashboard = () => {
 		    navigate('/login')
 		}
         getFavorites()
-	}, []);
+	}, [setCount]);
 
 
     return (
@@ -99,13 +109,15 @@ const Dashboard = () => {
                                     <div className="boxStyle">
         
                                         <Checkbox {...label}
+                                            checked = {true}
                                             icon={<FavoriteBorder
                                                 className="icon" />}
                                             checkedIcon={<Favorite
                                                 className="iconbutton" />}
-                                            // onClick = {(event) => {
-                                            //     handleLike(event, dialogue.id)
-                                            // }}
+                                            onClick = {(event) => {
+                                                handleDislike(event, dialogue.id)
+                                                setCount(count++)
+                                            }}
                                         />
         
                                         <img src={tagLine[dialogue.category][1]} alt="1" />
