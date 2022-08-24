@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { IconButton } from "@mui/material";
 import { useState, useContext, useEffect } from "react";
-import dance from "../assets/dance.svg"
 import Context from '../context/Context'
 
 
@@ -58,6 +57,7 @@ const Results = () => {
 
     const [currentDisliked, setCurrentDisliked] = useState(null)
     const [disliked, setDisliked] = useState({});
+    const [liked, setLiked] = useState({})
 
     const [modal, setModal] = useState(false);
     const [modalOne, setModalOne] = useState(false);
@@ -161,7 +161,7 @@ const Results = () => {
     }
     populateThreeShown();
 
-
+    console.log(liked)
     return (
         
         <div className="results">
@@ -193,12 +193,14 @@ const Results = () => {
                                 <div className="boxStyle">
     
                                     <Checkbox {...label}
+                                        checked = {!!liked[dialogue.id]}
                                         icon={<FavoriteBorder
                                             className="icon" />}
                                         checkedIcon={<Favorite
                                             className="iconbutton" />}
                                         onClick = {(event) => {
                                             toggleHeartModal()
+                                            setLiked({...liked, [dialogue.id] : true})
                                             handleLike(event, dialogue.id)
                                         }}
                                     />
