@@ -68,9 +68,6 @@ const Survey = () => {
 
     //some more states and contexts
     const {checked, setChecked} = useContext(Context)
-    const [array0, setArray0] = useState([])
-    const [array1, setArray1] = useState([])
-    const [array2, setArray2] = useState([])
     const [checkList, setCheckList] = useState({
         0: new Array(questionArray[0].answers.length).fill(false),
         1: new Array(questionArray[1].answers.length).fill(false),
@@ -93,16 +90,6 @@ const Survey = () => {
             list.splice(checked.indexOf(event.target.name), 1);
         }
         setChecked(list);
-
-        // let result0 = checkList[0].every(element => element === false);
-        // setArray0(result0)
-        // console.log(array0, "result0")
-        // let result1 = checkList[1].every(element => element === false);
-        // setArray1(result1)
-        // console.log(array1, "result1")
-        // let result2 = checkList[2].every(element => element === false);
-        // setArray2(result2)
-        // console.log(array2, "result2")
     };
 
 

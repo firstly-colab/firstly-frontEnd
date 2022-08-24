@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useContext, useState, useEffect } from 'react'
+import { useContext, useState } from 'react'
 import Context from '../context/Context'
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
@@ -8,7 +8,7 @@ const LoginPage = () => {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const [message, setMessage] = useState('')
-	const { user, setUser } = useContext(Context)
+	const { setUser } = useContext(Context)
 
 	const navigate = useNavigate();
 
