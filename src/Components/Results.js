@@ -51,7 +51,7 @@ const Results = () => {
     }
 
     const navigate = useNavigate();
-    const {checked, setChecked, user} = useContext(Context)
+    const {checked, setChecked } = useContext(Context)
     const [result, setResult] = useState([])
     const [isLoading, setIsLoading] = useState(false);
 
@@ -61,6 +61,8 @@ const Results = () => {
 
     const [modal, setModal] = useState(false);
     const [modalOne, setModalOne] = useState(false);
+
+    const user = JSON.parse(window.localStorage.getItem('user'))
 
     const toggleModal = () => {
         setModal(!modal);
@@ -161,7 +163,9 @@ const Results = () => {
     }
     populateThreeShown();
 
-    console.log(liked)
+    if (!user.id) {
+        navigate('/dashboard')
+    }
     return (
         
         <div className="results">
