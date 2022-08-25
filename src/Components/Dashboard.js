@@ -61,6 +61,7 @@ const Dashboard = () => {
         const response = await fetch(`https://mellow-colab.herokuapp.com/liked-question/${user.id}`)
         const data = await response.json()
         setFavorites(data)
+        console.log(data)
     }
 
     const handleDislike = async (e, response_id) => {
@@ -70,21 +71,13 @@ const Dashboard = () => {
         })
         const message = await response.json()
         console.log(message)
+        getFavorites()
     }
 
     //doesn't work as intended; will get to back to it later
     useEffect(() => {
-		const loggedIn = window.localStorage.getItem("isLoggedIn");
-
-		if (loggedIn) {
-		    const user = JSON.parse(window.localStorage.getItem("user"));
-		    setUser(user);
-		} else {
-		    navigate('/login')
-		}
         getFavorites()
-	}, [setCount]);
-
+	}, [favorites.length]);
 
     return (
         <div className="dashboard">
@@ -116,7 +109,6 @@ const Dashboard = () => {
                                                 className="iconbutton" />}
                                             onClick = {(event) => {
                                                 handleDislike(event, dialogue.id)
-                                                setCount(count++)
                                             }}
                                         />
         
