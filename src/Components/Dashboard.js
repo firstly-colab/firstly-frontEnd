@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import happychatting from "../assets/happychatting.svg"
-import { useState, useContext, useEffect } from "react";
-import Context from '../context/Context'
+import { useState, useEffect } from "react";
 import Checkbox from '@mui/material/Checkbox';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
@@ -38,9 +37,9 @@ const Dashboard = () => {
         "Planning the next hike" : ["View is always better from the top...", hike]
     }
 
-    const { user, setUser } = useContext(Context)
+    // const { user, setUser } = useContext(Context)
     const [favorites, setFavorites] = useState([])
-    let [count, setCount] = useState(0)
+    const user = JSON.parse(window.localStorage.getItem('user'))
     
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
@@ -61,7 +60,6 @@ const Dashboard = () => {
         const response = await fetch(`https://mellow-colab.herokuapp.com/liked-question/${user.id}`)
         const data = await response.json()
         setFavorites(data)
-        console.log(data)
     }
 
     const handleDislike = async (e, response_id) => {
