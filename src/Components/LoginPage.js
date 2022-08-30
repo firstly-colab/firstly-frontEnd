@@ -19,7 +19,7 @@ const LoginPage = () => {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
-				email,
+				email : email.toLowerCase(),
 				password
 			})
 		})
