@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { IconButton } from "@mui/material";
 import { useState, useContext, useEffect } from "react";
-// import dance from "../assets/dance.svg"
+
 import Context from '../context/Context'
 
 
@@ -52,17 +52,19 @@ const Results = () => {
     }
 
     const navigate = useNavigate();
-    const {checked, setChecked, user} = useContext(Context)
+    const {checked, setChecked } = useContext(Context)
     const [result, setResult] = useState([])
     const [isLoading, setIsLoading] = useState(false);
 
     const [currentDisliked, setCurrentDisliked] = useState(null)
     const [disliked, setDisliked] = useState({});
+    const [liked, setLiked] = useState({})
 
     const [modal, setModal] = useState(false);
     const [modalOne, setModalOne] = useState(false);
 
     const [disable, setDisable] = useState("");
+    const user = JSON.parse(window.localStorage.getItem('user'))
 
     const toggleModal = () => {
         setModal(!modal);
@@ -173,6 +175,9 @@ const Results = () => {
     };
 
 
+    if (!user.id) {
+        navigate('/dashboard')
+    }
     return (
         
         <div className="results">
@@ -204,12 +209,14 @@ const Results = () => {
                                 <div className="boxStyle">
     
                                     <Checkbox {...label}
+                                        checked = {!!liked[dialogue.id]}
                                         icon={<FavoriteBorder
                                         className="icon" />}
                                         checkedIcon={<Favorite
                                         className="iconbutton" />}
                                         onClick = {(event) => {
                                             toggleHeartModal()
+                                            setLiked({...liked, [dialogue.id] : true})
                                             handleLike(event, dialogue.id)
                                         }}
                                     />

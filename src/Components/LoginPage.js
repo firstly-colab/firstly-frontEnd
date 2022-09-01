@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useContext, useState, useEffect } from 'react'
+import { useContext, useState } from 'react'
 import Context from '../context/Context'
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
@@ -20,7 +20,7 @@ const LoginPage = () => {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
-				email,
+				email : email.toLowerCase(),
 				password
 			})
 		})

@@ -69,9 +69,7 @@ const Survey = () => {
 
     //some more states and contexts
     const {checked, setChecked} = useContext(Context)
-    const [array0, setArray0] = useState(true)
-    // const [array1, setArray1] = useState([])
-    // const [array2, setArray2] = useState([])
+
     const [checkList, setCheckList] = useState({
         0: new Array(questionArray[0].answers.length).fill(false),
         1: new Array(questionArray[1].answers.length).fill(false),
@@ -98,15 +96,6 @@ const Survey = () => {
         }
         setChecked(list);
 
-        let result0 = checkList[page - 1 ].every(element => element === false);
-        setArray0(result0)
-        console.log(array0, "result0")
-        // let result1 = checkList[1].every(element => element === false);
-        // setArray1(result1)
-        // console.log(array1, "result1")
-        // let result2 = checkList[2].every(element => element === false);
-        // setArray2(result2)
-        // console.log(array2, "result2")
     };
 
 
@@ -199,16 +188,16 @@ const Survey = () => {
                         <button
                                 type="button"
                                 onClick={handleNext}
-                                style={{ backgroundColor: array0 === true ? 'rgba(0, 0, 0, 0.5)' : 'black' }} 
-                                disabled={array0 === true}
+                                // style={{ backgroundColor: array0 === true ? 'rgba(0, 0, 0, 0.5)' : 'black' }} 
+                                // disabled={array0 === true}
                             >Next
                             </button>
                         ) : ( 
                             <button
                                 type="button"
                                 onClick={handleSubmit}
-                                    disabled={array0 === true}
-                                    style={{ backgroundColor: array0 === true ? 'rgba(0, 0, 0, 0.5)' : 'black' }}
+                                    // disabled={array0 === true}
+                                    // style={{ backgroundColor: array0 === true ? 'rgba(0, 0, 0, 0.5)' : 'black' }}
                             >Submit
                             </button>
                         )} 

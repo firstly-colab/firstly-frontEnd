@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import happychatting from "../assets/happychatting.svg"
-import { useState, useContext, useEffect } from "react";
-import Context from '../context/Context'
+import { useState, useEffect } from "react";
 import Checkbox from '@mui/material/Checkbox';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
@@ -38,9 +37,9 @@ const Dashboard = () => {
         "Planning the next hike" : ["View is always better from the top...", hike]
     }
 
-    const { user, setUser } = useContext(Context)
+    // const { user, setUser } = useContext(Context)
     const [favorites, setFavorites] = useState([])
-    const [isLoading, setIsLoading] = useState(false);
+    const user = JSON.parse(window.localStorage.getItem('user'))
     
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
@@ -63,69 +62,83 @@ const Dashboard = () => {
         setFavorites(data)
     }
 
+    const handleDislike = async (e, response_id) => {
+        e.preventDefault();
+        const response = await fetch(`https://mellow-colab.herokuapp.com/liked-question/${user.id}/${response_id}`, {
+            method: 'DELETE',
+        })
+        const message = await response.json()
+        console.log(message)
+        getFavorites()
+    }
+
     //doesn't work as intended; will get to back to it later
     useEffect(() => {
-		const loggedIn = window.localStorage.getItem("isLoggedIn");
-        // setIsLoading(true);
+// <<<<<<< HEAD
+// 		const loggedIn = window.localStorage.getItem("isLoggedIn");
+//         // setIsLoading(true);
 
-		if (loggedIn) {
-            // setTimeout(function () {
-            //     setIsLoading(false);
-            // }, 1500)
+// 		if (loggedIn) {
+//             // setTimeout(function () {
+//             //     setIsLoading(false);
+//             // }, 1500)
 
-            const user = JSON.parse(window.localStorage.getItem("user"));
-            setUser(user);
-		} else {
-		    navigate('/login')
-		}
+//             const user = JSON.parse(window.localStorage.getItem("user"));
+//             setUser(user);
+// 		} else {
+// 		    navigate('/login')
+// 		}
+// =======
+// >>>>>>> 3a8a4099bf98e0dcffcd374244711f50eec781fb
         getFavorites()
-	}, []);
-
+	}, [favorites.length]);
 
     return (
         <div className="dashboard">
-            {/* {isLoading ?
-                <div className="spinnerContainer">
-                    <p>Loading...</p>
-                    <div className="loadingSpinner"></div>
-                </div> :
-            <> */}
-                <div className="dashboxcontainer">
-                    <h1>Firstly</h1>
-                    <button className="logout" onClick={handleLogout}>Log out</button>
-                </div>
-                <div className="wrapper">
-                    <p>Hi {user.name[0].toUpperCase() + user.name.slice(1)}!</p>
-                    <img src={happychatting} alt="an illustration of a male and female chatting"></img>
-                    <p>Going on a date? We’ll help you keep the conversation flowin’</p>
-                    <button className="takeQuestionaire" onClick={handleSubmit}>Take questionnaire </button>
+
+            <div className="dashboxcontainer">
+                <h1>Firstly</h1>
+                <button className="logout" onClick={handleLogout}>Log out</button>
+            </div>
+            <div className="wrapper">
+                <p>Hi {user.name[0].toUpperCase() + user.name.slice(1)}!</p>
+                <img src={happychatting} alt="an illustration of a male and female chatting"></img>
+                <p>Going on a date? We’ll help you keep the conversation flowin’</p>
+                <button className="takeQuestionaire" onClick={handleSubmit}>Take questionnaire </button>
                     <p className="favorites">Your Favorites ({ favorites.length })</p>
-                    {favorites.length > 0 ? favorites.map(dialogue => {
-                    //cards for showing the favorites
-                    return (
-                    <div key={dialogue.id}>
-                        <div className="ontop">
-                            <p className="smallfont">{dialogue.category}</p>
-                            <div className="boxStyle">
-                                <Checkbox {...label}
-                                    icon={<FavoriteBorder
-                                    className="icon" />}
-                                    checkedIcon={<Favorite
-                                    className="iconbutton" />}
-                                    // onClick = {(event) => {
-                                    //     handleLike(event, dialogue.id)
-                                    // }}
-                                    />
-                                    <img src={tagLine[dialogue.category][1]} alt="1" />
-                                    <h3>{dialogue.dialogue}</h3>
+                    {favorites.length > 0 ?
+                        favorites.map(dialogue => {
+                        //cards for showing the favorites
+                        return (
+                                <div key={dialogue.id}>
+                                <div className="ontop">
+                                    <p className="smallfont">{dialogue.category}</p>
+        
+                                    <div className="boxStyle">
+        
+                                        <Checkbox {...label}
+                                            checked = {true}
+                                            icon={<FavoriteBorder
+                                                className="icon" />}
+                                            checkedIcon={<Favorite
+                                                className="iconbutton" />}
+                                            onClick = {(event) => {
+                                                handleDislike(event, dialogue.id)
+                                            }}
+                                        />
+        
+                                        <img src={tagLine[dialogue.category][1]} alt="1" />
+                                        <h3>{dialogue.dialogue}</h3>
+                                    </div>
+                                </div>
+                                </div>
+                        ) 
+                        }) : <div className="noFavouritesYet">
+                                <img src={nofavourites} alt="heart bubble"></img>
+                                <p>No favorites yet!</p>
+                                <p>Take the Firstly questionnaire to find and save your favorite conversation starters!</p>
                             </div>
-                        </div>
-                    </div>)}) : 
-                    <div className="noFavouritesYet">
-                        <img src={nofavourites} alt="heart bubble"></img>
-                        <p>No favorites yet!</p>
-                        <p>Take the Firstly questionnaire to find and save your favorite conversation starters!</p>
-                    </div>} 
+                    } 
                 </div>
             {/* </>} */}
         </div>
