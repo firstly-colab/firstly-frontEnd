@@ -89,7 +89,7 @@ const LoginPage = () => {
 							/>
 						{/* <VisibilityOffIcon /> */}
 					</label>
-					{message && <p> {message} </p>}
+						{message && <p className='errorMsg'> {message} </p>}
 					
 					<button onClick=
 						{handleSubmit}

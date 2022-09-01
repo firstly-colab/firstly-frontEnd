@@ -80,7 +80,7 @@ const SignupPage = () => {
 							/>
 						{/* <VisibilityOffIcon /> */}
 					</label>
-					{message && <p> {message} </p>}
+					{message && <p className='errorMsg'> {message} </p>}
 					<button 
 						onClick={handleSubmit}
 						style={{ backgroundColor: password.length === 0 || email.length === 0 || name.length === 0 ? 'rgba(0, 0, 0, 0.5)' : 'black' }}

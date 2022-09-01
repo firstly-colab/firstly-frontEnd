@@ -6,7 +6,8 @@ const Home = () => {
     const navigate = useNavigate();
 
     const handleSubmit = () => {
-        navigate("/login")
+        navigate('/signup')
+
     };
 
     return (
