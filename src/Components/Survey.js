@@ -188,16 +188,16 @@ const Survey = () => {
                         <button
                                 type="button"
                                 onClick={handleNext}
-                                // style={{ backgroundColor: array0 === true ? 'rgba(0, 0, 0, 0.5)' : 'black' }} 
-                                // disabled={array0 === true}
+                                style={{ backgroundColor: checked.length === 0 ? 'rgba(0, 0, 0, 0.5)' : 'black' }} 
+                                disabled={checked.length === 0}
                             >Next
                             </button>
                         ) : ( 
                             <button
                                 type="button"
                                 onClick={handleSubmit}
-                                    // disabled={array0 === true}
-                                    // style={{ backgroundColor: array0 === true ? 'rgba(0, 0, 0, 0.5)' : 'black' }}
+                                    disabled={checked.length === 0}
+                                    style={{ backgroundColor: checked.length === 0 ? 'rgba(0, 0, 0, 0.5)' : 'black' }}
                             >Submit
                             </button>
                         )} 

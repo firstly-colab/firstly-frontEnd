@@ -72,24 +72,7 @@ const Dashboard = () => {
         getFavorites()
     }
 
-    //doesn't work as intended; will get to back to it later
     useEffect(() => {
-// <<<<<<< HEAD
-// 		const loggedIn = window.localStorage.getItem("isLoggedIn");
-//         // setIsLoading(true);
-
-// 		if (loggedIn) {
-//             // setTimeout(function () {
-//             //     setIsLoading(false);
-//             // }, 1500)
-
-//             const user = JSON.parse(window.localStorage.getItem("user"));
-//             setUser(user);
-// 		} else {
-// 		    navigate('/login')
-// 		}
-// =======
-// >>>>>>> 3a8a4099bf98e0dcffcd374244711f50eec781fb
         getFavorites()
 	}, [favorites.length]);
 
@@ -140,7 +123,6 @@ const Dashboard = () => {
                             </div>
                     } 
                 </div>
-            {/* </>} */}
         </div>
     );
 }
