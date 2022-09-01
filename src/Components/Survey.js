@@ -16,6 +16,7 @@ const Survey = () => {
 
     //States
     const [page, setPage] = useState(0)
+    const [disable, setDisable] = useState("");
     
     
     //progress bar assets
@@ -68,9 +69,9 @@ const Survey = () => {
 
     //some more states and contexts
     const {checked, setChecked} = useContext(Context)
-    const [array0, setArray0] = useState([])
-    const [array1, setArray1] = useState([])
-    const [array2, setArray2] = useState([])
+    const [array0, setArray0] = useState(true)
+    // const [array1, setArray1] = useState([])
+    // const [array2, setArray2] = useState([])
     const [checkList, setCheckList] = useState({
         0: new Array(questionArray[0].answers.length).fill(false),
         1: new Array(questionArray[1].answers.length).fill(false),
@@ -79,6 +80,9 @@ const Survey = () => {
 
     //event handling funtions
     const handleCheck = (event, index) => {
+
+        setDisable(event.target.value)
+        console.log(disable, "disable")
         const key = page - 1;
         const keyValue = checkList[key]
         
@@ -94,9 +98,9 @@ const Survey = () => {
         }
         setChecked(list);
 
-        // let result0 = checkList[0].every(element => element === false);
-        // setArray0(result0)
-        // console.log(array0, "result0")
+        let result0 = checkList[page - 1 ].every(element => element === false);
+        setArray0(result0)
+        console.log(array0, "result0")
         // let result1 = checkList[1].every(element => element === false);
         // setArray1(result1)
         // console.log(array1, "result1")
@@ -121,6 +125,9 @@ const Survey = () => {
         event.preventDefault();
         console.log(checked, "submitted list")
         setPage(page + 1)
+        if (page === 1) {
+            
+        }
     };
 
     const handleSubmit = () => {
@@ -192,15 +199,16 @@ const Survey = () => {
                         <button
                                 type="button"
                                 onClick={handleNext}
-                                style={{ backgroundColor: checked.length === 0 ? 'rgba(0, 0, 0, 0.5)' : 'black' }} 
-                                disabled={checked.length === 0}
+                                style={{ backgroundColor: array0 === true ? 'rgba(0, 0, 0, 0.5)' : 'black' }} 
+                                disabled={array0 === true}
                             >Next
                             </button>
                         ) : ( 
                             <button
                                 type="button"
                                 onClick={handleSubmit}
-                                disabled={checked.length === 0}
+                                    disabled={array0 === true}
+                                    style={{ backgroundColor: array0 === true ? 'rgba(0, 0, 0, 0.5)' : 'black' }}
                             >Submit
                             </button>
                         )} 

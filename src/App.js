@@ -11,6 +11,7 @@ import SignupPage from './Components/SignupPage'
 //styles
 import './style/master.css'
 
+
 function App() {
   return (
     <div className="App">

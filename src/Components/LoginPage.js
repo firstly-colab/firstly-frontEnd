@@ -9,6 +9,7 @@ const LoginPage = () => {
 	const [password, setPassword] = useState('')
 	const [message, setMessage] = useState('')
 	const { user, setUser } = useContext(Context)
+	const [isLoading, setIsLoading] = useState(false);
 
 	const navigate = useNavigate();
 
@@ -29,12 +30,16 @@ const LoginPage = () => {
 			setMessage(data)
 			return;
 		} 
+		setIsLoading(true);
 		setMessage('')
 		window.localStorage.setItem("token", data.token)
 		window.localStorage.setItem("user", JSON.stringify(data.user))
 		window.localStorage.setItem("isLoggedIn", true)
 		setUser(data.user)
+		setTimeout(function () {
+        setIsLoading(false);
 		navigate('/dashboard')
+        }, 1500)
 	}
 
 	const handleSubmit = (event) => {
@@ -54,6 +59,11 @@ const LoginPage = () => {
 
 	return (
         <div className="login">
+			{isLoading ?
+				<div className="spinnerContainer">
+					<p>Loading...</p>
+					<div className="loadingSpinner"></div>
+				</div> :
 			<div className="wrapper">
 				<h2>Log In!</h2>
 				<p>One step closer to curated conversation starters for your first date.</p>
@@ -80,7 +90,9 @@ const LoginPage = () => {
 						{/* <VisibilityOffIcon /> */}
 					</label>
 					{message && <p> {message} </p>}
-					<button onClick={handleSubmit}
+					
+					<button onClick=
+						{handleSubmit}
 						style={{ backgroundColor: password.length === 0 || email.length === 0 ? 'rgba(0, 0, 0, 0.5)' : 'black' }}
 						disabled={password.length === 0 || email.length === 0}
 						>Log in
@@ -88,7 +100,7 @@ const LoginPage = () => {
 				</form>
 				<p>Don't have an account?</p>
 				<button className="signUp" onClick = {goToSignup}> Sign up </button>
-			</div>
+			</div>}
 		</div>
 	);
 };

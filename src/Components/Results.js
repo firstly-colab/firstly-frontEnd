@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { IconButton } from "@mui/material";
 import { useState, useContext, useEffect } from "react";
-import dance from "../assets/dance.svg"
+// import dance from "../assets/dance.svg"
 import Context from '../context/Context'
 
 
@@ -62,15 +62,19 @@ const Results = () => {
     const [modal, setModal] = useState(false);
     const [modalOne, setModalOne] = useState(false);
 
+    const [disable, setDisable] = useState("");
+
     const toggleModal = () => {
         setModal(!modal);
+        setDisable("")
     };
+
 
     const toggleHeartModal = () => {
         setModalOne(!modalOne);
         if (modalOne === false) { setTimeout(() => {
         setModalOne(modalOne);
-        }, 2000)}
+        }, 800)}
         else {
             return
         }
@@ -105,7 +109,7 @@ const Results = () => {
             setTimeout(function () {
                 setResult(data)
                 setIsLoading(false);
-            }, 2000)
+            }, 1500)
         } catch (error)
             {
             console.log(error)
@@ -118,6 +122,7 @@ const Results = () => {
         toggleModal()
         console.log("new Question comes now")
         setDisliked({...disliked, [currentDisliked] : true})
+        setDisable("")
     }
 
     const handleLike = async (e, question_id) => {
@@ -161,6 +166,12 @@ const Results = () => {
     }
     populateThreeShown();
 
+    const handleChange = (e) => {
+            console.log(e,"e")
+        setDisable(e.target.value)
+        console.log(disable,"disable")
+    };
+
 
     return (
         
@@ -194,9 +205,9 @@ const Results = () => {
     
                                     <Checkbox {...label}
                                         icon={<FavoriteBorder
-                                            className="icon" />}
+                                        className="icon" />}
                                         checkedIcon={<Favorite
-                                            className="iconbutton" />}
+                                        className="iconbutton" />}
                                         onClick = {(event) => {
                                             toggleHeartModal()
                                             handleLike(event, dialogue.id)
@@ -238,19 +249,29 @@ const Results = () => {
                         <div onClick={toggleModal} className="overlay"></div>
                         <form className="modalContent">
                             <h3>Okay! Tell us why:</h3>
+                            {console.log(surveyArray, "survey aray")}
                             {surveyArray.map((survey, index) =>
                                 <div className="flexRadio" key={index}>
                                     <input
                                         id={index}
                                         type="radio"
-                                        name="selected"
+                                        name="data"
+                                        value={survey}
+                                        onChange={(event) => {
+                                            handleChange(event)
+                                        }
+}
+
                                     />
                                     <label htmlFor={index}>{survey}</label>
+
                                 </div>
                             )}
                             <button className="refresh" 
-                                onClick={handleRefresh}
-                                
+                                onClick={handleRefresh
+                                }
+                                style={{ backgroundColor: disable === "" ? 'rgba(0, 0, 0, 0.5)' : 'black' }} 
+                                disabled={disable === ""} 
                             >Send
                             </button>
                         </form>
