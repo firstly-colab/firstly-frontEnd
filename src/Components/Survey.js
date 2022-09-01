@@ -67,8 +67,14 @@ const Survey = () => {
         },
     ];
 
+    
+
+
     //some more states and contexts
     const {checked, setChecked} = useContext(Context)
+    const [array0, setArray0] = useState([])
+        const [array1, setArray1] = useState([])
+        const [array2, setArray2] = useState([])
 
     const [checkList, setCheckList] = useState({
         0: new Array(questionArray[0].answers.length).fill(false),
@@ -96,6 +102,16 @@ const Survey = () => {
         }
         setChecked(list);
 
+        let result0 = checkList[0].every(element => element === false);
+        setArray0(result0)
+        console.log(array0, "result0")
+        let result1 = checkList[1].every(element => element === false);
+        setArray1(result1)
+        console.log(array1, "result1")
+        let result2 = checkList[2].every(element => element === false);
+        setArray2(result2)
+        console.log(array2, "result2")
+
     };
 
 
@@ -105,6 +121,7 @@ const Survey = () => {
         }
         else {
             setPage(page - 1)
+
         }
             
     };
@@ -114,9 +131,8 @@ const Survey = () => {
         event.preventDefault();
         console.log(checked, "submitted list")
         setPage(page + 1)
-        if (page === 1) {
-            
-        }
+
+
     };
 
     const handleSubmit = () => {
@@ -139,13 +155,13 @@ const Survey = () => {
                     </IconButton>
                     <p>Just a little reminder...</p>
                     <img src={yourock} alt="gif of a rock moving its eyes"></img>
-                    <button onClick={() => setPage(1) }>Start</button>
+                    <button onClick={handleNext }>Start</button>
                 </div>
             </div>
         );
     }
 
-    else {
+    if(page === 1) {
         return (
             <div className="questionOne">
                 <div className="wrapper">
@@ -184,27 +200,120 @@ const Survey = () => {
                                 <label htmlFor={index}> {answers} </label>
                             </div>
                         )}
-                        {page < 3 ? (
                         <button
                                 type="button"
                                 onClick={handleNext}
-                                style={{ backgroundColor: checked.length === 0 ? 'rgba(0, 0, 0, 0.5)' : 'black' }} 
-                                disabled={checked.length === 0}
+                                style={{ backgroundColor: checked.length === 0 || array0 === true ? 'rgba(0, 0, 0, 0.5)' : 'black' }} 
+                                disabled={checked.length === 0 || array0 === true}
                             >Next
                             </button>
-                        ) : ( 
-                            <button
-                                type="button"
-                                onClick={handleSubmit}
-                                    disabled={checked.length === 0}
-                                    style={{ backgroundColor: checked.length === 0 ? 'rgba(0, 0, 0, 0.5)' : 'black' }}
-                            >Submit
-                            </button>
-                        )} 
                     </form>
                 </div>
             </div>
         );    
+    }
+    if (page === 2) {
+        return (
+            <div className="questionOne">
+                <div className="wrapper">
+                    <div className="flex">
+                        <IconButton
+                            type="button"
+                            onClick={handleBack}>
+                            <ArrowBackIcon
+                                className="colorArrow" />
+                        </IconButton>
+                        <img
+                            src={imageArray[page - 1].image}
+                            alt={imageArray[page - 1].title}
+                        />
+                    </div>
+
+                    <h2>
+                        {questionArray[page - 1].question}
+                    </h2>
+
+                    <form className="questions">
+                        {questionArray[page - 1].answers.map((answers, index) =>
+                            <div key={index}>
+                                <input
+                                    id={index}
+                                    type="checkbox"
+                                    value={checkList[page - 1]}
+                                    checked={checkList[page - 1][index]}
+                                    name={answers}
+
+                                    onChange={(event) => {
+                                        handleCheck(event, index)
+                                    }}
+
+                                />
+                                <label htmlFor={index}> {answers} </label>
+                            </div>
+                        )}
+                            <button
+                                type="button"
+                                onClick={handleNext}
+                                style={{ backgroundColor: array1 === true ? 'rgba(0, 0, 0, 0.5)' : 'black' }}
+                            disabled={array1 === true}
+                            >Next
+                            </button>
+ 
+                    </form>
+                </div>
+            </div>
+        );
+    }
+    if (page === 3) {
+        return (
+            <div className="questionOne">
+                <div className="wrapper">
+                    <div className="flex">
+                        <IconButton
+                            type="button"
+                            onClick={handleBack}>
+                            <ArrowBackIcon
+                                className="colorArrow" />
+                        </IconButton>
+                        <img
+                            src={imageArray[page - 1].image}
+                            alt={imageArray[page - 1].title}
+                        />
+                    </div>
+
+                    <h2>
+                        {questionArray[page - 1].question}
+                    </h2>
+
+                    <form className="questions">
+                        {questionArray[page - 1].answers.map((answers, index) =>
+                            <div key={index}>
+                                <input
+                                    id={index}
+                                    type="checkbox"
+                                    value={checkList[page - 1]}
+                                    checked={checkList[page - 1][index]}
+                                    name={answers}
+
+                                    onChange={(event) => {
+                                        handleCheck(event, index)
+                                    }}
+
+                                />
+                                <label htmlFor={index}> {answers} </label>
+                            </div>
+                        )}
+                            <button
+                                type="button"
+                                onClick={handleNext && handleSubmit}
+                                disabled={array2 === true}
+                                style={{ backgroundColor: array2 === true ? 'rgba(0, 0, 0, 0.5)' : 'black' }}
+                            >Submit
+                            </button>
+                    </form>
+                </div>
+            </div>
+        );
     }
 };
 

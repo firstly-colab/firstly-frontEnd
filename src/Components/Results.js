@@ -66,6 +66,8 @@ const Results = () => {
     const [disable, setDisable] = useState("");
     const user = JSON.parse(window.localStorage.getItem('user'))
 
+
+
     const toggleModal = () => {
         setModal(!modal);
         setDisable("")
@@ -221,7 +223,7 @@ const Results = () => {
                                         }}
                                     />
     
-                                    <img src={tagLine[dialogue.category][1]} alt="1" />
+                                    <img src={tagLine[dialogue.category][1]} alt={tagLine[dialogue.category][0]} />
                                     <p>{tagLine[dialogue.category][0]}</p>
                                     <h3>{dialogue.dialogue}</h3>
     
@@ -229,10 +231,8 @@ const Results = () => {
                                         onClick={() => {
                                             toggleModal()
                                             setCurrentDisliked(dialogue.id)
-                                        }
-                                        }>
-                                        <RefreshIcon
-                                            className="icon" />
+                                        }}>
+                                        <RefreshIcon className="icon" />
                                     </IconButton>
     
                                 </div>
