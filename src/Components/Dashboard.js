@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Checkbox from '@mui/material/Checkbox';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
+import useAuth from "../hooks/useAuth";
 //pics
 import food from '../assets/food.svg'
 import family from '../assets/family.svg'
@@ -37,6 +38,7 @@ const Dashboard = () => {
         "Planning the next hike" : ["View is always better from the top...", hike]
     }
 
+    const { logout } = useAuth();
     const [favorites, setFavorites] = useState([])
     const user = JSON.parse(window.localStorage.getItem('user'))
     
@@ -47,13 +49,6 @@ const Dashboard = () => {
     const handleSubmit = () => {
         navigate("/survey")
     };
-    
-    const handleLogout = () => {
-        window.localStorage.removeItem("token")
-        window.localStorage.removeItem("user")
-        window.localStorage.removeItem("isLoggedIn")
-        navigate('/login')
-    }
 
     const getFavorites = async () => {
         const response = await fetch(`https://mellow-colab.herokuapp.com/liked-question/${user.id}`)
@@ -79,7 +74,7 @@ const Dashboard = () => {
         <div className="dashboard">
             <div className="dashboxcontainer">
                 <h1>Firstly</h1>
-                <button className="logout" onClick={handleLogout}>Log out</button>
+                <button className="logout" onClick={logout}>Log out</button>
             </div>
             <div className="wrapper">
                 <p>Hi {user.name[0].toUpperCase() + user.name.slice(1)}!</p>

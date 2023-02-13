@@ -1,50 +1,14 @@
 import { useNavigate } from "react-router-dom";
-import { useContext, useState } from 'react'
-import Context from '../context/Context'
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import useAuth from "../hooks/useAuth";
 
 const LoginPage = () => {
 
-	const [email, setEmail] = useState('')
-	const [password, setPassword] = useState('')
-	const [message, setMessage] = useState('')
-	const { user, setUser } = useContext(Context)
-	const [isLoading, setIsLoading] = useState(false);
-
+	const { handleChange, login, authInfo, isLoading, message, setMessage } = useAuth();
 	const navigate = useNavigate();
-
-	async function login() {
-		const response = await fetch('https://mellow-colab.herokuapp.com/login', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				email : email.toLowerCase(),
-				password
-			})
-		})
-		const data = await response.json()
-
-		if (!data.token) {
-			setMessage(data)
-			return;
-		} 
-		setIsLoading(true);
-		setMessage('')
-		window.localStorage.setItem("token", data.token)
-		window.localStorage.setItem("user", JSON.stringify(data.user))
-		window.localStorage.setItem("isLoggedIn", true)
-		setUser(data.user)
-		setTimeout(function () {
-        setIsLoading(false);
-		navigate('/dashboard')
-        }, 1500)
-	}
 
 	const handleSubmit = (event) => {
 		event.preventDefault()
-		if (!email && !password) {
+		if (!authInfo.email && !authInfo.password) {
 			setMessage('The above fields are required')
 		} else {
 			setMessage("")
@@ -74,27 +38,26 @@ const LoginPage = () => {
 							type="text" 
 							name="email" 
 							placeholder="Enter your email" 
-							onChange={(event) => setEmail(event.target.value)}
-							value = {email}
+							onChange={(event) => handleChange(event)}
+							value = {authInfo.email}
 						/>
 					</label>
 					<label>
 						Password
 						<input 
-							type="password" 
-							name="name" 
+							type="password"
+							name="password" 
 							placeholder="Enter your password"
-							onChange={(event) => setPassword(event.target.value)}
-							value = {password}
+							onChange={(event) => handleChange(event)}
+							value = {authInfo.password}
 							/>
-						{/* <VisibilityOffIcon /> */}
 					</label>
 						{message && <p className='errorMsg'> {message} </p>}
 					
 					<button onClick=
 						{handleSubmit}
-						style={{ backgroundColor: password.length === 0 || email.length === 0 ? 'rgba(0, 0, 0, 0.5)' : 'black' }}
-						disabled={password.length === 0 || email.length === 0}
+						style={{ backgroundColor: authInfo.password.length === 0 || authInfo.email.length === 0 ? 'rgba(0, 0, 0, 0.5)' : 'black' }}
+						disabled={authInfo.password.length === 0 || authInfo.email.length === 0}
 						>Log in
 					</button>
 				</form>

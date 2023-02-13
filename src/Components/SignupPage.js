@@ -1,42 +1,15 @@
-import { useState } from 'react'
 import { useNavigate } from "react-router-dom";
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import useAuth from '../hooks/useAuth'
 
 
 
 const SignupPage = () => {
-
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [message, setMessage] = useState('')
-
+	const { handleChange, signup, message, authInfo } = useAuth();
     const navigate = useNavigate()
-    async function register () {
-		const response = await fetch('https://mellow-colab.herokuapp.com/register', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				email : email.toLowerCase(),
-                name,
-				password
-			})
-		})
-
-        const data = await response.json();
-
-        if (!data.token) {
-            setMessage(data)
-            return
-        }
-        navigate('/login')
-    }
 
     function handleSubmit (e) {
         e.preventDefault()
-        register()
+        signup()
     }
 
 	const goToLogin = () => {
@@ -55,8 +28,8 @@ const SignupPage = () => {
 							type="text" 
 							name="name" 
 							placeholder="Enter your first name" 
-							onChange={(event) => setName(event.target.value)}
-							value = {name}
+							onChange={(event) => handleChange(event)}
+							value = {authInfo.name}
 						/>
 					</label>
 					<label>
@@ -65,8 +38,8 @@ const SignupPage = () => {
 							type="text" 
 							name="email" 
 							placeholder="Enter your email" 
-							onChange={(event) => setEmail(event.target.value)}
-							value = {email}
+							onChange={(event) => handleChange(event)}
+							value = {authInfo.email}
 						/>
 					</label>
 					<label>
@@ -75,16 +48,16 @@ const SignupPage = () => {
 							type="password" 
 							name="password" 
 							placeholder="Enter your password"
-							onChange={(event) => setPassword(event.target.value)}
-							value = {password}
+							onChange={(event) => handleChange(event)}
+							value = {authInfo.password}
 							/>
-						{/* <VisibilityOffIcon /> */}
 					</label>
 					{message && <p className='errorMsg'> {message} </p>}
 					<button 
 						onClick={handleSubmit}
-						style={{ backgroundColor: password.length === 0 || email.length === 0 || name.length === 0 ? 'rgba(0, 0, 0, 0.5)' : 'black' }}
-						disabled={password.length === 0 || email.length === 0 || name.length === 0}>
+						style={{ backgroundColor: (authInfo.password.length || 0) === 0 || (authInfo.email.length || 0) === 0 || (authInfo.name.length || 0) === 0 ? 'rgba(0, 0, 0, 0.5)' : 'black' }}
+						disabled={authInfo.password.length === 0 || authInfo.email.length === 0 || authInfo.name.length === 0}
+						>
 							Sign up
 						
 					</button>
