@@ -1,21 +1,25 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import Context from '../context/Context';
 
 const useAuth = () => {
-    const [user, setUser] = useState({})
+
+    const { setUser } = useContext(Context)
+    const [authInfo, setAuthInfo] = useState({name: '', email: '', password: ''})
     const [message, setMessage] = useState('')
+    const [isLoading, setIsLoading] = useState(false); 
 
     const navigate = useNavigate();
 
     const handleChange = (event) => {
-        setUser({
-            ...user,
+        setAuthInfo({
+            ...authInfo,
             [event.target.name] : event.target.value
         })
     }
 
     const login = async () => {
-        const { email, password } = user
+        const { email, password } = authInfo
         //const response = await fetch('https://mellow-colab.herokuapp.com/login', {
         const response = await fetch('http://localhost:3001/login', {
 			method: 'POST',
@@ -45,7 +49,7 @@ const useAuth = () => {
     }
 
     const signup = async () => {
-        const { name, email, password } =user
+        const { name, email, password } = authInfo
         //const response = await fetch('https://mellow-colab.herokuapp.com/register', {
         const response = await fetch('http://localhost:3001/register', {
 			method: 'POST',
@@ -78,7 +82,10 @@ const useAuth = () => {
         handleChange,
         login,
         signup,
-        logout
+        logout,
+        authInfo,
+        message,
+        setMessage
     }
 }
 
